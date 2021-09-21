@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title="Thiết bị"
+        android:icon="@drawable/ic_baseline_5g_24"/>
+    <item
+        android:id="@+id/favor"
+        android:title="Trực tuyến"
+        android:icon="@drawable/ic_baseline_5g_24"/>
+    <item
+        android:id="@+id/user"
+        android:title="Người dùng"
+        android:icon="@drawable/ic_baseline_5g_24"/>
+</menu>

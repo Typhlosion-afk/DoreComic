@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DoreComic</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="t_ng">Tổng:</string>
+    <string name="trang">trang</string>
+</resources>
