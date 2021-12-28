@@ -1,6 +1,7 @@
 package com.example.dorecomic.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dorecomic.R
 import com.example.dorecomic.adapter.ListComicAdapter
 import com.example.dorecomic.model.Comic
+import java.io.File
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +28,8 @@ class HomeFragment : Fragment() {
     private var isGridView: Boolean = true
     private lateinit var recyclerView: RecyclerView
     private lateinit var rootView: View
+    private lateinit var rootDir: File
+    private var rootPath: String = "/storage/6431-3633/.comic/"
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -42,13 +46,18 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         rootView = inflater.inflate(R.layout.fragment_offline, container, false)
 
+        initData()
         initView()
         initAdapter()
 
         return rootView
+    }
+
+    private fun initData() {
+
     }
 
     private fun initView() {
@@ -67,12 +76,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun initAdapter(){
+        rootDir = File(rootPath)
         val ls : ArrayList<Comic> = ArrayList<Comic>()
-        ls.add(Comic("Pokemon đặc biệt", null))
-        ls.add(Comic("Slime chuyển sinh", null))
-        ls.add(Comic("Thám tử Conan", null))
-        ls.add(Comic("Mèo máy Doremon", null))
-        ls.add(Comic("Kiếm sĩ Yaiba", null))
+
+        for(f:File in rootDir.listFiles()!!){
+            ls.add(Comic(f.absolutePath, f.name))
+        }
         if(isGridView){
             GridLayoutManager(activity, 3, RecyclerView.VERTICAL, false)
                 .apply {
@@ -82,3 +91,4 @@ class HomeFragment : Fragment() {
         recyclerView.adapter = context?.let { ListComicAdapter(ls, it) }
     }
 }
+

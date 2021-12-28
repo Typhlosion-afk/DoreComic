@@ -1,4 +1,6 @@
 package com.example.dorecomic.model
 
-class Comic(public val name: String,public val listChapter: List<Chapter>?){
+import java.io.Serializable
+
+class Comic(val path: String, val name: String) : Serializable{
 }

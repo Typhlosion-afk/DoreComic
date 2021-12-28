@@ -2,6 +2,7 @@ package com.example.dorecomic.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager.widget.ViewPager
@@ -12,12 +13,14 @@ import com.example.dorecomic.fragment.UserFragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.dorecomic.adapter.HomePagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewPager: ViewPager
     private lateinit var navBottom: BottomNavigationView
     private lateinit var pagerAdapter : HomePagerAdapter
+    private val rootPath: String = "/storage/6431-3633/.comic/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +38,13 @@ class MainActivity : AppCompatActivity() {
         listFragment.add(homeFragment)
         listFragment.add(favoriteFragment)
         listFragment.add(userFragment)
+
+        val rootDir = File(rootPath).listFiles()!!
+
+        for(f: File in rootDir){
+            Log.d("====>>", "onCreate: $f")
+        }
+
 
         pagerAdapter = HomePagerAdapter(supportFragmentManager, listFragment)
         viewPager.adapter = pagerAdapter

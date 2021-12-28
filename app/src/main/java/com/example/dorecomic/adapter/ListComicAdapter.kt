@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dorecomic.R
+import com.example.dorecomic.activity.ListChapterActivity
 import com.example.dorecomic.activity.ReadingActivity
 import com.example.dorecomic.model.Comic
 import kotlinx.android.synthetic.main.cardview_vol_grid.view.*
@@ -31,8 +32,8 @@ class ListComicAdapter (private val list: ArrayList<Comic>, var mContext: Contex
         val comicName: TextView = itemView.txt_name_vol_grid
         init {
             itemView.setOnClickListener{
-                val intent: Intent = Intent(mContext, ReadingActivity::class.java).apply {
-                    putExtra("vol", "this is vol $adapterPosition")
+                val intent: Intent = Intent(mContext, ListChapterActivity::class.java).apply {
+                    putExtra("comic", list[adapterPosition])
                 }
                 mContext.startActivity(intent)
             }

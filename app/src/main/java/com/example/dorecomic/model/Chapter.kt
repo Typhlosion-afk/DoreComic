@@ -1,4 +1,4 @@
 package com.example.dorecomic.model
 
-class Chapter (name: String, path: String){
+class Chapter (val name: String,val path: String){
 }
