@@ -6,15 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".activity.ReadingActivity">
 
-    <TextView
-        android:id="@+id/test_text"
-        android:textSize="30sp"
-        android:textColor="@color/black"
-        android:text=""
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/container"
+        android:background="@color/white"
+        android:nestedScrollingEnabled="true"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

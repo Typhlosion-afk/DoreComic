@@ -34,6 +34,7 @@ class ListChapterAdapter (private val list : ArrayList<Chapter>, val context: Co
         init {
             itemView.setOnClickListener{
                 val intent = Intent(context, ReadingActivity::class.java)
+                intent.putExtra("vol",list[adapterPosition].path)
                 context.startActivity(intent)
             }
         }

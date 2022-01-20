@@ -4,5 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="t_ng">Tổng:</string>
     <string name="trang">trang</string>
+    <string name="default_name">default name</string>
+    <string name="chapter">Danh sách tập</string>
 
 </resources>

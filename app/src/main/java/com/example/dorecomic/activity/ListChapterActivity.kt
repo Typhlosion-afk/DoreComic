@@ -3,13 +3,11 @@ package com.example.dorecomic.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.dorecomic.R
-import com.example.dorecomic.adapter.ListChapterAdapter
+import com.example.dorecomic.fragment.ChapterListFragment
+import com.example.dorecomic.fragment.ComicDetailFragment
 import com.example.dorecomic.model.Chapter
 import com.example.dorecomic.model.Comic
-import kotlinx.android.synthetic.main.activity_list_chapter.*
 import java.io.File
 
 class ListChapterActivity : AppCompatActivity() {
@@ -25,23 +23,39 @@ class ListChapterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_list_chapter)
 
         getData()
-        initView()
+        initFragment()
+//        initView()
     }
 
-    private fun initView() {
-        var recyclerView = list_chapter_recycler
+    private fun initFragment() {
+        val comicDetailFragment = ComicDetailFragment()
+        val chapterListFragment = ChapterListFragment()
 
-        if(mListChapter.size == 0){
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container_fragment_top, chapterListFragment)
+            .commit()
 
-        }else{
-            LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-                .apply {
-                    recyclerView.layoutManager = this
-                }
-            recyclerView.adapter = ListChapterAdapter(mListChapter, this)
-
-        }
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container_fragment_bot, comicDetailFragment)
+            .commit()
     }
+
+//    private fun initView() {
+//        val recyclerView = list_chapter_recycler
+//
+//        if(mListChapter.size == 0){
+//
+//        }else{
+//            LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+//                .apply {
+//                    recyclerView.layoutManager = this
+//                }
+//            recyclerView.adapter = ListChapterAdapter(mListChapter, this)
+//
+//        }
+//    }
 
     private fun getData(){
         mComic = intent.getSerializableExtra("comic") as Comic
@@ -54,6 +68,4 @@ class ListChapterActivity : AppCompatActivity() {
 
 
     }
-
-
 }
