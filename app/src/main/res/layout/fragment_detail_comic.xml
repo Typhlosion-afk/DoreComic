@@ -4,12 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.ChapterListFragment">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/cover_image_detail"
-        android:layout_width="180dp"
+        android:layout_width="150dp"
         android:layout_height="220dp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/image_default"
@@ -19,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/comic_name"
+        android:id="@+id/comic_name_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/default_name"

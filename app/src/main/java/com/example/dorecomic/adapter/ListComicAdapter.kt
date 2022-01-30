@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.dorecomic.R
 import com.example.dorecomic.activity.ListChapterActivity
 import com.example.dorecomic.model.Comic
@@ -27,7 +28,12 @@ class ListComicAdapter (private val list: ArrayList<Comic>, var mContext: Contex
 
     override fun onBindViewHolder(holder: ComicHolder, position: Int) {
         holder.comicName.text = list[position].name
-        holder.comicImg.setImageResource(R.drawable.image_default)
+
+        Glide
+            .with(mContext)
+            .load(list[position].cover)
+            .fitCenter()
+            .into(holder.comicImg)
     }
 
     override fun getItemCount(): Int = list.size

@@ -1,4 +1,6 @@
 package com.example.dorecomic.model
 
-class Chapter (val name: String,val path: String){
+import java.io.Serializable
+
+class Chapter (val name: String,val path: String): Serializable{
 }

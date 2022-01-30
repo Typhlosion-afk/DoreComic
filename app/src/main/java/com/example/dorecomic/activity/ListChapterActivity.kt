@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.dorecomic.R
-import com.example.dorecomic.fragment.ChapterListFragment
-import com.example.dorecomic.fragment.ComicDetailFragment
+import com.example.dorecomic.fragment.sub.ComicDetailFragment
+import com.example.dorecomic.fragment.sub.ChapterDetailFragment
 import com.example.dorecomic.model.Chapter
 import com.example.dorecomic.model.Comic
 import java.io.File
@@ -24,46 +24,41 @@ class ListChapterActivity : AppCompatActivity() {
 
         getData()
         initFragment()
-//        initView()
     }
 
     private fun initFragment() {
         val comicDetailFragment = ComicDetailFragment()
-        val chapterListFragment = ChapterListFragment()
+        val chapterListFragment = ChapterDetailFragment()
+
+        val listChapterBundle = Bundle()
+        listChapterBundle.putSerializable("list", mListChapter)
+        chapterListFragment.arguments = listChapterBundle
+
+        val comicDetailBundle = Bundle()
+        comicDetailBundle.putSerializable("comic_detail", mComic)
+        comicDetailFragment.arguments = comicDetailBundle
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container_fragment_top, chapterListFragment)
+            .replace(R.id.container_fragment_bot, chapterListFragment)
             .commit()
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container_fragment_bot, comicDetailFragment)
+            .replace(R.id.container_fragment_top, comicDetailFragment)
             .commit()
+
+
     }
-
-//    private fun initView() {
-//        val recyclerView = list_chapter_recycler
-//
-//        if(mListChapter.size == 0){
-//
-//        }else{
-//            LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-//                .apply {
-//                    recyclerView.layoutManager = this
-//                }
-//            recyclerView.adapter = ListChapterAdapter(mListChapter, this)
-//
-//        }
-//    }
 
     private fun getData(){
         mComic = intent.getSerializableExtra("comic") as Comic
         mComicPath = mComic.path
         val comicDir = File(mComicPath)
         for (f: File in comicDir.listFiles()!!){
-            mListChapter.add(Chapter(f.name, f.absolutePath))
-            Log.d("TAG", "getData: " + f.name)
+            if(f.name != "cover") {
+                mListChapter.add(Chapter(f.name, f.absolutePath))
+            }
         }
 
 

@@ -1,5 +1,6 @@
-package com.example.dorecomic.fragment
+package com.example.dorecomic.fragment.home
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -78,9 +79,10 @@ class HomeFragment : Fragment() {
     private fun initAdapter(){
         rootDir = File(rootPath)
         val ls : ArrayList<Comic> = ArrayList<Comic>()
-
+        ls.clear()
         for(f:File in rootDir.listFiles()!!){
-            ls.add(Comic(f.absolutePath, f.name))
+            val coverPath = "${f.absolutePath}/cover/cover.jpg"
+            ls.add(Comic(f.absolutePath, f.name, coverPath))
         }
         if(isGridView){
             GridLayoutManager(activity, 3, RecyclerView.VERTICAL, false)
