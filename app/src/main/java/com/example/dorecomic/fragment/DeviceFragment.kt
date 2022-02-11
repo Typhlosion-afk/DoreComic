@@ -1,4 +1,4 @@
-package com.example.dorecomic.fragment.home
+package com.example.dorecomic.fragment
 
 import android.graphics.Bitmap
 import android.os.Bundle

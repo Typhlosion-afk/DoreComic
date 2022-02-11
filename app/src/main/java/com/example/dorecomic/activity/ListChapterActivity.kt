@@ -2,10 +2,9 @@ package com.example.dorecomic.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.dorecomic.R
-import com.example.dorecomic.fragment.sub.ComicDetailFragment
-import com.example.dorecomic.fragment.sub.ChapterDetailFragment
+import com.example.dorecomic.fragment.device.ComicDetailFragment
+import com.example.dorecomic.fragment.device.ChapterDetailFragment
 import com.example.dorecomic.model.Chapter
 import com.example.dorecomic.model.Comic
 import java.io.File

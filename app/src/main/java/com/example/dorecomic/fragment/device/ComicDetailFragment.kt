@@ -1,4 +1,4 @@
-package com.example.dorecomic.fragment.sub
+package com.example.dorecomic.fragment.device
 
 import android.content.Context
 import android.os.Bundle

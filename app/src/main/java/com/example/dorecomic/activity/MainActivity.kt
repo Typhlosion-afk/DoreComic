@@ -9,9 +9,9 @@ import androidx.viewpager.widget.ViewPager
 import com.example.dorecomic.R
 import androidx.viewpager2.widget.ViewPager2
 import com.example.dorecomic.adapter.HomePagerAdapter
-import com.example.dorecomic.fragment.home.FavoriteFragment
-import com.example.dorecomic.fragment.home.HomeFragment
-import com.example.dorecomic.fragment.home.UserFragment
+import com.example.dorecomic.fragment.FavoriteFragment
+import com.example.dorecomic.fragment.HomeFragment
+import com.example.dorecomic.fragment.UserFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.File
 
@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navBottom: BottomNavigationView
     private lateinit var pagerAdapter : HomePagerAdapter
     private val rootPath: String = "/storage/6431-3633/.comic/"
+
+    private val isLogin = true;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

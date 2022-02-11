@@ -6,5 +6,23 @@
     <string name="trang">trang</string>
     <string name="default_name">default name</string>
     <string name="chapter">Danh sách tập</string>
+    <string name="_99">99+</string>
+    <string name="user_name">User Name</string>
+    <string name="id_000000">ID: 000000</string>
+    <string name="love">Yêu thích</string>
+    <string name="log_out">Đăng xuất</string>
+    <string name="history">Lịch sử</string>
+    <string name="news">Khám phá</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login_string">Vui lòng đăng nhập để tiếp tục</string>
+    <string name="login">Login</string>
 
 </resources>
