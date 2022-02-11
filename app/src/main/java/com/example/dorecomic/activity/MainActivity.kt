@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         listFragment.add(favoriteFragment)
         listFragment.add(userFragment)
 
-        val rootDir = File(rootPath).listFiles()!!
+        val rootDir = File(rootPath).listFiles()
 
         for(f: File in rootDir){
             Log.d("====>>", "onCreate: $f")
