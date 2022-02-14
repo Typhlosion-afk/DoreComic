@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view_vol"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="wrap_content"
     android:layout_marginVertical="5dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="8dp">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
     <FrameLayout
         android:alpha="1"
@@ -23,27 +23,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="3dp">
+
         <ImageView
             android:id="@+id/cover_image"
-            android:layout_width="70dp"
-            android:src="@drawable/default_comic"
-            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:scaleType="fitXY"
+            android:src="@drawable/default_comic"
+            android:layout_margin="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription,MissingConstraints" />
 
         <TextView
-            android:paddingHorizontal="16dp"
             android:id="@+id/txt_name_chapter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:paddingHorizontal="16dp"
             android:text="@string/app_name"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/cover_image"
             app:layout_constraintStart_toEndOf="@+id/cover_image"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/cover_image" />
 
         <TextView
             android:id="@+id/txt_name_vol"
@@ -61,16 +64,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/t_ng"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/txt_total_page" />
+            app:layout_constraintEnd_toStartOf="@+id/txt_total_page"
+            tools:ignore="SmallSp" />
         <TextView
+            android:textSize="12sp"
             android:layout_marginEnd="10dp"
             android:id="@+id/txt_total_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/trang"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginRight="10dp" />
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

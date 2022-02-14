@@ -6,11 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".activity.ReadingActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <FrameLayout
         android:id="@+id/container"
-        android:background="@color/white"
-        android:nestedScrollingEnabled="true"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

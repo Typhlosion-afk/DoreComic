@@ -78,7 +78,7 @@ class HomeFragment : Fragment() {
 
     private fun initAdapter(){
         rootDir = File(rootPath)
-        val ls : ArrayList<Comic> = ArrayList<Comic>()
+        val ls : ArrayList<Comic> = ArrayList()
         ls.clear()
         for(f:File in rootDir.listFiles()!!){
             val coverPath = "${f.absolutePath}/cover/cover.jpg"

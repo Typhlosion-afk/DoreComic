@@ -11,11 +11,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.size
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.dorecomic.R
 import com.example.dorecomic.adapter.BannerPagerAdapter
+import com.example.dorecomic.adapter.HistoryAdapter
 import com.example.dorecomic.model.Banner
+import com.example.dorecomic.model.Comic
 import me.relex.circleindicator.CircleIndicator
+import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -42,6 +47,13 @@ class UserProfileFragment : Fragment() {
     private var bannerSize = 0
     private lateinit var swipeTimer: Timer
     private var isRunning = false
+
+    private lateinit var rootDir: File
+    private var rootPath: String = "/storage/6431-3633/.comic/"
+
+
+    private lateinit var recyclerView: RecyclerView
+    private val listHis = ArrayList<Comic>()
 
     private var runnable = Runnable {
         if(viewPager.currentItem == listBanner.size - 1){
@@ -82,17 +94,27 @@ class UserProfileFragment : Fragment() {
         viewPager.adapter = bannerPagerAdapter
         indicator.setViewPager(viewPager)
 
+        recyclerView = rootView.findViewById(R.id.list_history)
     }
 
-    private fun initAction(){
+    private fun setTimer(){
         isRunning = true
-        Log.d("TAG", "initAction: ${viewPager.size}")
         swipeTimer = Timer()
         swipeTimer.schedule(object : TimerTask(){
             override fun run() {
                 handler.post(runnable)
             }
         }, 3000, 3000)
+    }
+
+    private fun initAction(){
+        setTimer()
+        val historyAdapter = activity?.let { HistoryAdapter(it, listHis) }
+        LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+            .apply {
+                recyclerView.layoutManager = this
+            }
+        recyclerView.adapter = historyAdapter
     }
 
     override fun onPause() {
@@ -107,7 +129,7 @@ class UserProfileFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         if(!isRunning){
-            initAction()
+            setTimer()
         }
     }
 
@@ -116,6 +138,23 @@ class UserProfileFragment : Fragment() {
         listBanner.add(Banner(BitmapFactory.decodeResource(resources,R.drawable.banner_2)))
         listBanner.add(Banner(BitmapFactory.decodeResource(resources,R.drawable.banner_3)))
         listBanner.add(Banner(BitmapFactory.decodeResource(resources,R.drawable.banner_4)))
+
+
+        rootDir = File(rootPath)
+        val ls : ArrayList<Comic> = ArrayList<Comic>()
+        ls.clear()
+        for(f: File in rootDir.listFiles()!!){
+            val coverPath = "${f.absolutePath}/cover/cover.jpg"
+            listHis.add(Comic(f.absolutePath, f.name, coverPath))
+        }
+        for(f: File in rootDir.listFiles()!!){
+            val coverPath = "${f.absolutePath}/cover/cover.jpg"
+            listHis.add(Comic(f.absolutePath, f.name, coverPath))
+        }
+        for(f: File in rootDir.listFiles()!!){
+            val coverPath = "${f.absolutePath}/cover/cover.jpg"
+            listHis.add(Comic(f.absolutePath, f.name, coverPath))
+        }
     }
 
     companion object {

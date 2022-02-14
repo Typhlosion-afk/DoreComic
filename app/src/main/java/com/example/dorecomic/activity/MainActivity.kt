@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager
     private lateinit var navBottom: BottomNavigationView
     private lateinit var pagerAdapter : HomePagerAdapter
-    private val rootPath: String = "/storage/6431-3633/.comic/"
 
     private val isLogin = true;
 
@@ -40,13 +39,6 @@ class MainActivity : AppCompatActivity() {
         listFragment.add(homeFragment)
         listFragment.add(favoriteFragment)
         listFragment.add(userFragment)
-
-        val rootDir = File(rootPath).listFiles()
-
-        for(f: File in rootDir){
-            Log.d("====>>", "onCreate: $f")
-        }
-
 
         pagerAdapter = HomePagerAdapter(supportFragmentManager, listFragment)
         viewPager.adapter = pagerAdapter
@@ -70,5 +62,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+        viewPager.offscreenPageLimit = 3
     }
 }

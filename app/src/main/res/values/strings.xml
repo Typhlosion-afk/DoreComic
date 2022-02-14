@@ -24,5 +24,6 @@
     <string name="login_failed">"Login failed"</string>
     <string name="login_string">Vui lòng đăng nhập để tiếp tục</string>
     <string name="login">Login</string>
+    <string name="todo">TODO</string>
 
 </resources>

@@ -4,29 +4,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_marginTop="32dp"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/cover_image_detail"
-        android:layout_width="150dp"
-        android:layout_height="220dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/image_default"
-        android:transitionName="comic_img_trans"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/cover_image_detail"
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/image_default"
+            android:transitionName="comic_img_trans"
+            android:contentDescription="@string/todo" />
+    </androidx.cardview.widget.CardView>
 
     <TextView
+        android:paddingVertical="12dp"
+        android:gravity="center"
         android:id="@+id/comic_name_detail"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/default_name"
         android:textColor="@color/black_400"
-        android:transitionName="comic_name_trans"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/cover_image_detail"
-        app:layout_constraintStart_toStartOf="@+id/cover_image_detail"
-        app:layout_constraintTop_toBottomOf="@+id/cover_image_detail" />
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/cardView2"
+        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,14 +15,14 @@ import com.bumptech.glide.Glide
 import com.example.dorecomic.R
 import com.example.dorecomic.activity.ListChapterActivity
 import com.example.dorecomic.model.Comic
-import kotlinx.android.synthetic.main.cardview_comic_grid.view.*
+import kotlinx.android.synthetic.main.cardview_grid_comic.view.*
 import kotlinx.android.synthetic.main.cardview_file.view.*
 
 class ListComicAdapter (private val list: ArrayList<Comic>, var mContext: Context)
     : RecyclerView.Adapter<ListComicAdapter.ComicHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicHolder {
-        val rootView: View = LayoutInflater.from(parent.context).inflate(R.layout.cardview_comic_grid, parent, false)
+        val rootView: View = LayoutInflater.from(parent.context).inflate(R.layout.cardview_grid_comic, parent, false)
         return ComicHolder(rootView)
     }
 
@@ -49,8 +49,7 @@ class ListComicAdapter (private val list: ArrayList<Comic>, var mContext: Contex
 
                 val option = ActivityOptions
                     .makeSceneTransitionAnimation(mContext as Activity?,
-                    Pair.create(comicImg, "comic_img_trans"),
-                    Pair.create(comicName, "comic_name_trans"))
+                    Pair.create(comicImg, "comic_img_trans"),)
 
                 mContext.startActivity(intent, option.toBundle())
             }

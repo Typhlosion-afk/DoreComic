@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dorecomic.R
 import com.example.dorecomic.adapter.ReadingAdapter
+import com.example.dorecomic.fragment.reading.ReadingFragment
 import com.example.dorecomic.model.Page
 import kotlinx.android.synthetic.main.activity_reading.*
 import java.io.File
@@ -22,7 +23,8 @@ class ReadingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_reading)
 
         initData()
-        initRecycleView()
+        initView()
+//        initRecycleView()
     }
 
     private fun initData() {
@@ -39,14 +41,27 @@ class ReadingActivity : AppCompatActivity() {
         Log.d("TAG", "initData: ${listPage.size}")
     }
 
-    private fun initRecycleView() {
-        val recyclerView: RecyclerView = container
+    private fun initView(){
+        val readingFragment = ReadingFragment()
 
-        LinearLayoutManager(this)
-            .apply {
-                recyclerView.layoutManager = this
-        }
-        recyclerView.isNestedScrollingEnabled = true
-        recyclerView.adapter = ReadingAdapter(this, listPage)
+        val bundle = Bundle()
+        bundle.putSerializable("list_page", listPage)
+        readingFragment.arguments = bundle
+
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.container, readingFragment, null)
+            .commit()
     }
+
+//    private fun initRecycleView() {
+//        val recyclerView: RecyclerView = container
+//
+//        LinearLayoutManager(this)
+//            .apply {
+//                recyclerView.layoutManager = this
+//        }
+//        recyclerView.isNestedScrollingEnabled = true
+//        recyclerView.adapter = ReadingAdapter(this, listPage)
+//    }
 }
