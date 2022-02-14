@@ -25,5 +25,9 @@
     <string name="login_string">Vui lòng đăng nhập để tiếp tục</string>
     <string name="login">Login</string>
     <string name="todo">TODO</string>
+    <string name="pre">Tập trước</string>
+    <string name="txt_continue">Đọc tiếp</string>
+    <string name="txt_next">Tập kế tiếp</string>
+    <string name="chap_1">Chap 1</string>
 
 </resources>

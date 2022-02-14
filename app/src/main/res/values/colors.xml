@@ -8,7 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF1D1D</color>
-    <color name="black_100">#E3E3E3</color>
+    <color name="black_100">#E6E6E6</color>
+    <color name="black_150">#DCDCDC</color>
     <color name="black_200">#BDBDBD</color>
     <color name="black_300">#8A8A8A</color>
     <color name="black_400">#434343</color>

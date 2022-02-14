@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.example.dorecomic.R
 import com.example.dorecomic.model.Page
 import kotlinx.android.synthetic.main.cardview_file.view.*
@@ -28,6 +31,7 @@ class ReadingAdapter(var context: Context, var ls: List<Page>) : RecyclerView.Ad
                 .with(context)
                 .load(ls[position].path)
                 .fitCenter()
+                .placeholder(R.drawable.default_comic)
                 .into(holder.pageView)
 
     }

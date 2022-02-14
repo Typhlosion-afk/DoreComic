@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dorecomic.R
+import com.example.dorecomic.adapter.ReadingAdapter
 import com.example.dorecomic.adapter.ReadingGridAdapter
 import com.example.dorecomic.model.Page
 
@@ -18,7 +20,7 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ReadingFragment.newInstance] factory method to
+ * Use the [ReadingGridFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class ReadingFragment : Fragment() {
@@ -56,13 +58,12 @@ class ReadingFragment : Fragment() {
     }
 
     private fun initView(){
-
         recyclerView = rootView.findViewById(R.id.reading_slide_container)
-        GridLayoutManager(activity, 5, RecyclerView.VERTICAL, false)
+        LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             .apply {
                 recyclerView.layoutManager = this
             }
-        recyclerView.adapter = context?.let { ReadingGridAdapter(it, listPage) }
+        recyclerView.adapter = context?.let { ReadingAdapter(it, listPage) }
     }
 
     companion object {
@@ -72,12 +73,12 @@ class ReadingFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment ReadingFragment.
+         * @return A new instance of fragment ReadingGridFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ReadingFragment().apply {
+            ReadingGridFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

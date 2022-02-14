@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.dorecomic.R
+import com.example.dorecomic.adapter.ReadingGridAdapter
+import com.example.dorecomic.model.Page
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -14,7 +18,7 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ReadingGridFragment.newInstance] factory method to
+ * Use the [ReadingFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class ReadingGridFragment : Fragment() {
@@ -23,6 +27,9 @@ class ReadingGridFragment : Fragment() {
     private var param2: String? = null
 
     private lateinit var rootView: View
+
+    private lateinit var recyclerView: RecyclerView
+    private var listPage = ArrayList<Page>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +43,7 @@ class ReadingGridFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        rootView = inflater.inflate(R.layout.fragment_reading_grid, container, false)
+        rootView = inflater.inflate(R.layout.fragment_reading, container, false)
 
         initData()
         initView()
@@ -45,11 +52,17 @@ class ReadingGridFragment : Fragment() {
     }
 
     private fun initData(){
-
+        listPage.addAll(arguments?.getSerializable("list_page") as List<Page>)
     }
 
     private fun initView(){
 
+        recyclerView = rootView.findViewById(R.id.reading_slide_container)
+        GridLayoutManager(activity, 5, RecyclerView.VERTICAL, false)
+            .apply {
+                recyclerView.layoutManager = this
+            }
+        recyclerView.adapter = context?.let { ReadingGridAdapter(it, listPage) }
     }
 
     companion object {
@@ -59,12 +72,12 @@ class ReadingGridFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment ReadingGridFragment.
+         * @return A new instance of fragment ReadingFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ReadingGridFragment().apply {
+            ReadingFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
