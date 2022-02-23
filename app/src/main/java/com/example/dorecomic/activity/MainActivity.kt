@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewPager: ViewPager
     private lateinit var navBottom: BottomNavigationView
-    private lateinit var pagerAdapter : HomePagerAdapter
+    private lateinit var pagerAdapter: HomePagerAdapter
 
     private val isLogin = true;
 
@@ -43,22 +43,22 @@ class MainActivity : AppCompatActivity() {
         pagerAdapter = HomePagerAdapter(supportFragmentManager, listFragment)
         viewPager.adapter = pagerAdapter
 
-        viewPager.addOnPageChangeListener(object: ViewPager.SimpleOnPageChangeListener() {
+        viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                when(position){
-                    0->navBottom.menu.findItem(R.id.home).isChecked = true
-                    1->navBottom.menu.findItem(R.id.favor).isChecked = true
-                    2->navBottom.menu.findItem(R.id.user).isChecked = true
+                when (position) {
+                    0 -> navBottom.menu.findItem(R.id.home).isChecked = true
+                    1 -> navBottom.menu.findItem(R.id.favor).isChecked = true
+                    2 -> navBottom.menu.findItem(R.id.user).isChecked = true
                 }
             }
         })
 
         navBottom.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.home-> viewPager.currentItem = 0
-                R.id.favor-> viewPager.currentItem = 1
-                R.id.user-> viewPager.currentItem = 2
+            when (it.itemId) {
+                R.id.home -> viewPager.currentItem = 0
+                R.id.favor -> viewPager.currentItem = 1
+                R.id.user -> viewPager.currentItem = 2
             }
             true
         }

@@ -7,8 +7,8 @@ import android.widget.TextView
 import com.example.dorecomic.R
 import com.example.dorecomic.fragment.reading.ReadingFragment
 import com.example.dorecomic.fragment.reading.ReadingGridFragment
-import com.example.dorecomic.model.Chapter
-import com.example.dorecomic.model.Page
+import com.example.dorecomic.model.database.Chapter
+import com.example.dorecomic.model.database.Page
 import com.example.dorecomic.model.database.AppDatabase
 import com.example.dorecomic.utilities.CHAPTER_PATH
 
@@ -41,15 +41,15 @@ class ReadingActivity : AppCompatActivity() {
     private fun initData() {
         listPage = ArrayList()
         val dao = AppDatabase.getInstance(applicationContext).comicDAO()
-        val chapterPath : String = intent.getStringExtra(CHAPTER_PATH) ?: ""
-        if(chapterPath != "" ) {
+        val chapterPath: String = intent.getStringExtra(CHAPTER_PATH) ?: ""
+        if (chapterPath != "") {
             chapter = dao.getChapter(chapterPath)
             listPage.addAll(dao.getListPageOf(chapterPath))
 
         }
     }
 
-    private fun initView(){
+    private fun initView() {
         txtChapName = findViewById(R.id.chapter_name)
         txtChapName.text = chapter.name
 
@@ -71,24 +71,24 @@ class ReadingActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun initAction(){
+    private fun initAction() {
         btnShowList.setOnClickListener {
             replaceFragment()
         }
 
     }
 
-    private fun replaceFragment(){
+    private fun replaceFragment() {
         val readingPageBundle = Bundle()
         readingPageBundle.putInt("page", readingPage)
 
-        isReading = if(!isReading){
+        isReading = if (!isReading) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, readingFragment, null)
                 .commit()
             true
-        }else{
+        } else {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, readingGridFragment, null)

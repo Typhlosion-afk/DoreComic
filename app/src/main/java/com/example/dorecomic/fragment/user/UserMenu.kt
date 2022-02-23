@@ -3,6 +3,7 @@ package com.example.dorecomic.fragment.user
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +15,10 @@ import com.example.dorecomic.R
 import com.example.dorecomic.adapter.BannerPagerAdapter
 import com.example.dorecomic.adapter.HistoryAdapter
 import com.example.dorecomic.model.Banner
-import com.example.dorecomic.model.Comic
+import com.example.dorecomic.model.database.AppDatabase
+import com.example.dorecomic.model.database.ComicDAO
+import com.example.dorecomic.model.database.History
 import me.relex.circleindicator.CircleIndicator
-import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -27,34 +29,33 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [UserProfileFragment.newInstance] factory method to
+ * Use the [UserMenuFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class UserProfileFragment : Fragment() {
+class UserMenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
     private lateinit var viewPager: ViewPager
     private lateinit var rootView: View
-
     private lateinit var indicator: CircleIndicator
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var historyAdapter: HistoryAdapter
+
+    private lateinit var swipeTimer: Timer
+    private lateinit var dao: ComicDAO
+
     private var handler = Handler()
     private var bannerSize = 0
-    private lateinit var swipeTimer: Timer
     private var isRunning = false
 
-    private lateinit var rootDir: File
-    private var rootPath: String = "/storage/6431-3633/.comic/"
-
-
-    private lateinit var recyclerView: RecyclerView
-    private val listHis = ArrayList<Comic>()
+    private val listHis = ArrayList<History>()
 
     private var runnable = Runnable {
-        if(viewPager.currentItem == listBanner.size - 1){
+        if (viewPager.currentItem == listBanner.size - 1) {
             viewPager.currentItem = 0
-        }else {
+        } else {
             val i = viewPager.currentItem
             viewPager.currentItem = i + 1
         }
@@ -74,7 +75,8 @@ class UserProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        rootView = inflater.inflate(R.layout.fragment_user_profile, container, false)
+        rootView = inflater.inflate(R.layout.fragment_user_menu, container, false)
+        dao = AppDatabase.getInstance(rootView.context).comicDAO()
         initData()
         initView()
         initAction()
@@ -82,7 +84,7 @@ class UserProfileFragment : Fragment() {
         return rootView
     }
 
-    private fun initView(){
+    private fun initView() {
         indicator = rootView.findViewById(R.id.banner_indicator)
         viewPager = rootView.findViewById(R.id.banner_view_pager)
 
@@ -93,19 +95,19 @@ class UserProfileFragment : Fragment() {
         recyclerView = rootView.findViewById(R.id.list_history)
     }
 
-    private fun setTimer(){
+    private fun setTimer() {
         isRunning = true
         swipeTimer = Timer()
-        swipeTimer.schedule(object : TimerTask(){
+        swipeTimer.schedule(object : TimerTask() {
             override fun run() {
                 handler.post(runnable)
             }
         }, 3000, 3000)
     }
 
-    private fun initAction(){
+    private fun initAction() {
         setTimer()
-        val historyAdapter = activity?.let { HistoryAdapter(it, listHis) }
+        historyAdapter = HistoryAdapter(rootView.context, listHis)
         LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
             .apply {
                 recyclerView.layoutManager = this
@@ -115,7 +117,7 @@ class UserProfileFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        if(isRunning){
+        if (isRunning) {
             swipeTimer.cancel()
             handler.removeCallbacks(runnable)
             isRunning = false
@@ -124,39 +126,32 @@ class UserProfileFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if(!isRunning){
+        if (!isRunning) {
             setTimer()
         }
+        initHistory()
     }
 
-    private fun initData(){
-        listBanner.add(Banner(BitmapFactory.decodeResource(resources,R.drawable.banner_1)))
-        listBanner.add(Banner(BitmapFactory.decodeResource(resources,R.drawable.banner_2)))
-        listBanner.add(Banner(BitmapFactory.decodeResource(resources,R.drawable.banner_3)))
-        listBanner.add(Banner(BitmapFactory.decodeResource(resources,R.drawable.banner_4)))
+    private fun initHistory(){
+        historyAdapter.updateListData(dao.getAllHis())
+    }
 
+    private fun initData() {
+        listBanner.clear()
+        listBanner.add(Banner(BitmapFactory.decodeResource(resources, R.drawable.banner_1)))
+        listBanner.add(Banner(BitmapFactory.decodeResource(resources, R.drawable.banner_2)))
+        listBanner.add(Banner(BitmapFactory.decodeResource(resources, R.drawable.banner_3)))
+        listBanner.add(Banner(BitmapFactory.decodeResource(resources, R.drawable.banner_4)))
 
-        rootDir = File(rootPath)
-        val ls : ArrayList<Comic> = ArrayList<Comic>()
-        ls.clear()
-        for(f: File in rootDir.listFiles()!!){
-            val coverPath = "${f.absolutePath}/cover/cover.jpg"
-            listHis.add(Comic(f.absolutePath,f.name, coverPath))
-        }
-        for(f: File in rootDir.listFiles()!!){
-            val coverPath = "${f.absolutePath}/cover/cover.jpg"
-            listHis.add(Comic(f.absolutePath,f.name, coverPath))
-        }
-        for(f: File in rootDir.listFiles()!!){
-            val coverPath = "${f.absolutePath}/cover/cover.jpg"
-            listHis.add(Comic(f.absolutePath,f.name, coverPath))
-        }
+        listHis.clear()
+        listHis.addAll(dao.getAllHis())
+        Log.d("TAG", "initData: ${listHis.size}")
     }
 
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            UserProfileFragment().apply {
+            UserMenuFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
