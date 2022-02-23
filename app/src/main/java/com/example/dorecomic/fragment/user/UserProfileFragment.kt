@@ -1,16 +1,12 @@
 package com.example.dorecomic.fragment.user
 
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.size
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -145,15 +141,15 @@ class UserProfileFragment : Fragment() {
         ls.clear()
         for(f: File in rootDir.listFiles()!!){
             val coverPath = "${f.absolutePath}/cover/cover.jpg"
-            listHis.add(Comic(f.absolutePath, f.name, coverPath))
+            listHis.add(Comic(f.absolutePath,f.name, coverPath))
         }
         for(f: File in rootDir.listFiles()!!){
             val coverPath = "${f.absolutePath}/cover/cover.jpg"
-            listHis.add(Comic(f.absolutePath, f.name, coverPath))
+            listHis.add(Comic(f.absolutePath,f.name, coverPath))
         }
         for(f: File in rootDir.listFiles()!!){
             val coverPath = "${f.absolutePath}/cover/cover.jpg"
-            listHis.add(Comic(f.absolutePath, f.name, coverPath))
+            listHis.add(Comic(f.absolutePath,f.name, coverPath))
         }
     }
 

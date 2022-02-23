@@ -2,21 +2,32 @@ package com.example.dorecomic.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.Button
+import android.widget.TextView
 import com.example.dorecomic.R
-import com.example.dorecomic.adapter.ReadingAdapter
 import com.example.dorecomic.fragment.reading.ReadingFragment
+import com.example.dorecomic.fragment.reading.ReadingGridFragment
+import com.example.dorecomic.model.Chapter
 import com.example.dorecomic.model.Page
-import kotlinx.android.synthetic.main.activity_reading.*
-import java.io.File
+import com.example.dorecomic.model.database.AppDatabase
+import com.example.dorecomic.utilities.CHAPTER_PATH
 
 class ReadingActivity : AppCompatActivity() {
 
     private lateinit var listPage: ArrayList<Page>
     private lateinit var message: String
-    private lateinit var chapterFile: File
+    private lateinit var chapter: Chapter
+
+    private lateinit var txtChapName: TextView
+    private lateinit var btnPre: Button
+    private lateinit var btnNext: Button
+    private lateinit var btnShowList: Button
+    private lateinit var readingFragment: ReadingFragment
+    private lateinit var readingGridFragment: ReadingGridFragment
+
+    private var readingPage = 0;
+
+    private var isReading = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,29 +35,35 @@ class ReadingActivity : AppCompatActivity() {
 
         initData()
         initView()
-//        initRecycleView()
+        initAction()
     }
 
     private fun initData() {
         listPage = ArrayList()
-        message = intent.getStringExtra("vol") as String
-        Log.d("TAG", "initData: $message")
-        chapterFile = File(message)
-        var num = 1
-        for (f in chapterFile.listFiles()!!){
-            if(f.extension == "jpg"){
-                listPage.add(Page(num++,f.name, f.absolutePath))
-            }
+        val dao = AppDatabase.getInstance(applicationContext).comicDAO()
+        val chapterPath : String = intent.getStringExtra(CHAPTER_PATH) ?: ""
+        if(chapterPath != "" ) {
+            chapter = dao.getChapter(chapterPath)
+            listPage.addAll(dao.getListPageOf(chapterPath))
+
         }
-        Log.d("TAG", "initData: ${listPage.size}")
     }
 
     private fun initView(){
-        val readingFragment = ReadingFragment()
+        txtChapName = findViewById(R.id.chapter_name)
+        txtChapName.text = chapter.name
 
-        val bundle = Bundle()
-        bundle.putSerializable("list_page", listPage)
-        readingFragment.arguments = bundle
+        btnNext = findViewById(R.id.btn_next)
+        btnPre = findViewById(R.id.btn_pre)
+        btnShowList = findViewById(R.id.btn_continue)
+
+        readingFragment = ReadingFragment()
+        readingGridFragment = ReadingGridFragment()
+
+        val listPageBundle = Bundle()
+        listPageBundle.putSerializable("list_page", listPage)
+        readingFragment.arguments = listPageBundle
+        readingGridFragment.arguments = listPageBundle
 
         supportFragmentManager
             .beginTransaction()
@@ -54,14 +71,30 @@ class ReadingActivity : AppCompatActivity() {
             .commit()
     }
 
-//    private fun initRecycleView() {
-//        val recyclerView: RecyclerView = container
-//
-//        LinearLayoutManager(this)
-//            .apply {
-//                recyclerView.layoutManager = this
-//        }
-//        recyclerView.isNestedScrollingEnabled = true
-//        recyclerView.adapter = ReadingAdapter(this, listPage)
-//    }
+    private fun initAction(){
+        btnShowList.setOnClickListener {
+            replaceFragment()
+        }
+
+    }
+
+    private fun replaceFragment(){
+        val readingPageBundle = Bundle()
+        readingPageBundle.putInt("page", readingPage)
+
+        isReading = if(!isReading){
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container, readingFragment, null)
+                .commit()
+            true
+        }else{
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container, readingGridFragment, null)
+                .commit()
+            false
+        }
+    }
+
 }

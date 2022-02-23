@@ -10,8 +10,10 @@
         android:paddingBottom="3dp"
         android:elevation="3dp"
         android:id="@+id/page_comic"
+        android:scaleType="fitXY"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />

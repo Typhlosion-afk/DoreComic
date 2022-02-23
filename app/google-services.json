@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "752463359600",
+    "project_id": "dorecomic",
+    "storage_bucket": "dorecomic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752463359600:android:bb57aa1a084ea73015ceb5",
+        "android_client_info": {
+          "package_name": "com.example.dorecomic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752463359600-vf9m6i4gcd9eqife2fvvbqcm2oe45sld.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dorecomic",
+            "certificate_hash": "85a33cd8b64065d42fd9f126ce42d3e15470495d"
+          }
+        },
+        {
+          "client_id": "752463359600-b3j5dr3vpunq8pu0b7n8kn3jc1bc6c58.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUkj_MZpToDfnuZbS6CmFoJSEAHSsEhms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752463359600-b3j5dr3vpunq8pu0b7n8kn3jc1bc6c58.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,17 +1,15 @@
 package com.example.dorecomic.fragment
 
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dorecomic.R
 import com.example.dorecomic.adapter.ListComicAdapter
+import com.example.dorecomic.model.database.AppDatabase
 import com.example.dorecomic.model.Comic
 import java.io.File
 
@@ -77,13 +75,24 @@ class HomeFragment : Fragment() {
     }
 
     private fun initAdapter(){
-        rootDir = File(rootPath)
+//        rootDir = File(rootPath)
+//        val ls : ArrayList<Comic> = ArrayList()
+//        ls.clear()
+//        for(f:File in rootDir.listFiles()!!){
+//            val coverPath = "${f.absolutePath}/cover/cover.jpg"
+//            ls.add(Comic(0,f.absolutePath ,f.name, coverPath))
+//        }
+//        context?.let {
+//            AppDatabase
+//            .getInstance(it)
+//            .comicDAO()
+//                .addListComic(ls)}
+
         val ls : ArrayList<Comic> = ArrayList()
         ls.clear()
-        for(f:File in rootDir.listFiles()!!){
-            val coverPath = "${f.absolutePath}/cover/cover.jpg"
-            ls.add(Comic(f.absolutePath, f.name, coverPath))
-        }
+        context?.let { AppDatabase.getInstance(it).comicDAO().getListComic() }
+            ?.let { ls.addAll(it) }
+
         if(isGridView){
             GridLayoutManager(activity, 3, RecyclerView.VERTICAL, false)
                 .apply {

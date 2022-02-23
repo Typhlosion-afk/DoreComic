@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dorecomic.R
 import com.example.dorecomic.activity.ListChapterActivity
+import com.example.dorecomic.model.database.AppDatabase
 import com.example.dorecomic.model.Comic
-import kotlinx.android.synthetic.main.cardview_grid_comic.view.*
-import kotlinx.android.synthetic.main.cardview_file.view.*
+import com.example.dorecomic.utilities.COMIC_PATH
 
 class ListComicAdapter (private val list: ArrayList<Comic>, var mContext: Context)
     : RecyclerView.Adapter<ListComicAdapter.ComicHolder>(){
@@ -39,12 +40,13 @@ class ListComicAdapter (private val list: ArrayList<Comic>, var mContext: Contex
     override fun getItemCount(): Int = list.size
 
     inner class ComicHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
-        val comicName: TextView = itemView.txt_name_vol_grid
-        val comicImg: ImageView = itemView.cover_image
+        val comicName: TextView = itemView.findViewById(R.id.txt_name_vol_grid)
+        val comicImg: ImageView = itemView.findViewById(R.id.cover_image)
         init {
             itemView.setOnClickListener{
                 val intent: Intent = Intent(mContext, ListChapterActivity::class.java).apply {
-                    putExtra("comic", list[adapterPosition])
+                    putExtra(COMIC_PATH, list[absoluteAdapterPosition].path)
+
                 }
 
                 val option = ActivityOptions

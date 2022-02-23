@@ -29,5 +29,15 @@
     <string name="txt_continue">Đọc tiếp</string>
     <string name="txt_next">Tập kế tiếp</string>
     <string name="chap_1">Chap 1</string>
+    <string name="back">Back</string>
+    <string name="back_vie">Quay lại</string>
+    <string name="choose">Lựa chọn</string>
+    <string name="open">Mở rộng</string>
+    <string name="file">file</string>
+    <string name="facebook_app_id">991958841674048</string>
+    <string name="fb_login_protocol_scheme">fb991958841674048</string>
+
+
+
 
 </resources>

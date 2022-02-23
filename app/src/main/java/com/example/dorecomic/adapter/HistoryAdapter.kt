@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide
 import com.example.dorecomic.R
 import com.example.dorecomic.activity.ListChapterActivity
 import com.example.dorecomic.model.Comic
-import kotlinx.android.synthetic.main.cardview_grid_comic.view.*
 
 class HistoryAdapter(val context: Context, val listHis: List<Comic>) :
     RecyclerView.Adapter<HistoryAdapter.HistoryHolder>() {
@@ -42,12 +41,12 @@ class HistoryAdapter(val context: Context, val listHis: List<Comic>) :
     }
 
     inner class HistoryHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val comicName: TextView = itemView.txt_name_vol_grid
-        val comicImg: ImageView = itemView.cover_image
+        val comicName: TextView = itemView.findViewById(R.id.txt_name_vol_grid)
+        val comicImg: ImageView = itemView.findViewById(R.id.cover_image)
         init {
             itemView.setOnClickListener{
                 val intent = Intent(context, ListChapterActivity::class.java).apply {
-                    putExtra("comic", listHis[adapterPosition])
+                    putExtra("comic", listHis[absoluteAdapterPosition])
                 }
                 val option = ActivityOptions
                     .makeSceneTransitionAnimation(context as Activity?,

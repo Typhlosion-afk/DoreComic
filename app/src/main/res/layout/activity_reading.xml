@@ -60,6 +60,7 @@
         android:paddingHorizontal="4dp"
         android:layout_weight="1">
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_pre"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -70,6 +71,7 @@
             android:background="@android:color/transparent"
             tools:ignore="NestedWeights" />
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_continue"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="@string/txt_continue"
@@ -80,6 +82,7 @@
             android:layout_weight="1"
             tools:ignore="NestedWeights" />
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:textAllCaps="false"

@@ -15,6 +15,8 @@ import com.example.dorecomic.fragment.user.UserDetailFragment
 import com.example.dorecomic.fragment.user.UserProfileFragment
 import com.example.dorecomic.minterface.NoneUserClick
 import com.example.dorecomic.model.User
+import com.facebook.AccessToken
+import com.facebook.GraphRequest
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,6 +52,9 @@ class UserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         rootView = inflater.inflate(R.layout.fragment_user, container, false)
+        user = User("Guest","000000")
+        val accessToken = AccessToken.getCurrentAccessToken()
+        isLogin = accessToken != null && !accessToken.isExpired
         initFragment()
         return rootView
     }
@@ -83,10 +88,12 @@ class UserFragment : Fragment() {
             userProfileView.visibility = View.VISIBLE
             userDetailView.visibility = View.VISIBLE
 
+
             val userDetailFragment = UserDetailFragment()
 
             val bundle = Bundle()
             bundle.putSerializable("user", user)
+            Log.d("TAG", "initFragment: ${user.name}")
             userDetailFragment.arguments = bundle
 
             childFragmentManager.beginTransaction()
@@ -99,6 +106,9 @@ class UserFragment : Fragment() {
                 .commit()
         }
     }
+
+
+
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

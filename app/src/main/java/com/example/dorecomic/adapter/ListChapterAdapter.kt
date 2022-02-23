@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dorecomic.R
 import com.example.dorecomic.activity.ReadingActivity
 import com.example.dorecomic.model.Chapter
-import kotlinx.android.synthetic.main.cardview_vol.view.*
+import com.example.dorecomic.utilities.CHAPTER_PATH
+import kotlin.math.abs
 
 class ListChapterAdapter (private val list : ArrayList<Chapter>, val context: Context)
     : RecyclerView.Adapter<ListChapterAdapter.ChapterHolder>(){
@@ -30,11 +31,11 @@ class ListChapterAdapter (private val list : ArrayList<Chapter>, val context: Co
     }
 
     inner class ChapterHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val chapterName: TextView = itemView.txt_name_chapter
+        val chapterName: TextView = itemView.findViewById(R.id.txt_name_chapter)
         init {
             itemView.setOnClickListener{
                 val intent = Intent(context, ReadingActivity::class.java)
-                intent.putExtra("vol",list[adapterPosition].path)
+                intent.putExtra(CHAPTER_PATH,list[absoluteAdapterPosition].path)
                 context.startActivity(intent)
             }
         }
