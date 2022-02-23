@@ -36,7 +36,7 @@ class RootFileChooserFragment : DialogFragment() {
 
     private lateinit var txtPath: TextView
     private var listFile = ArrayList<File>()
-    private lateinit var curFile : File
+    private lateinit var curFile: File
     private lateinit var fileDialogAdapter: FileDialogAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var onResultDialog: OnResultDialog
@@ -63,7 +63,7 @@ class RootFileChooserFragment : DialogFragment() {
 
     private fun initAction() {
         btnBack.setOnClickListener {
-            if(currentPath != "/storage") {
+            if (currentPath != "/storage") {
                 currentPath = curFile.parentFile?.absolutePath.toString()
                 updateAdapter()
             }
@@ -76,10 +76,11 @@ class RootFileChooserFragment : DialogFragment() {
 
         btnChoose.setOnClickListener {
             val rootPath = fileDialogAdapter.getSelectedPath()
-            val sharedPrefs : SharedPreferences = activity?.getPreferences(AppCompatActivity.MODE_PRIVATE)
-                ?: return@setOnClickListener
+            val sharedPrefs: SharedPreferences =
+                activity?.getPreferences(AppCompatActivity.MODE_PRIVATE)
+                    ?: return@setOnClickListener
 
-            with(sharedPrefs.edit()){
+            with(sharedPrefs.edit()) {
                 putString("root_file", rootPath)
                 apply()
             }
@@ -89,7 +90,7 @@ class RootFileChooserFragment : DialogFragment() {
         }
     }
 
-    private fun initView(){
+    private fun initView() {
         btnChoose = rootView.findViewById<Button>(R.id.btn_chosefile)
         btnOpen = rootView.findViewById<Button>(R.id.btn_openfile)
         btnBack = rootView.findViewById<Button>(R.id.btn_back)
@@ -98,7 +99,7 @@ class RootFileChooserFragment : DialogFragment() {
 
     }
 
-    private fun initAdapter(){
+    private fun initAdapter() {
         curFile = File(currentPath)
         listFile = ArrayList<File>()
         listFile.addAll(curFile.listFiles() ?: return)
@@ -113,10 +114,10 @@ class RootFileChooserFragment : DialogFragment() {
 
     // update list file
     @SuppressLint("NotifyDataSetChanged")
-    private fun updateAdapter(){
+    private fun updateAdapter() {
         listFile.clear()
         curFile = File(currentPath)
-        listFile.addAll(curFile.listFiles()?:return)
+        listFile.addAll(curFile.listFiles() ?: return)
         Log.d("size", "updateAdapter: ${listFile.size}")
         Log.d("path", "updateAdapter: $currentPath")
         Log.d("size", "updateAdapter: ${listFile.size}")

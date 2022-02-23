@@ -1,22 +1,15 @@
 package com.example.dorecomic.fragment
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.example.dorecomic.R
-import com.example.dorecomic.activity.LoginActivity
-import com.example.dorecomic.fragment.user.NoneUserFragment
-import com.example.dorecomic.fragment.user.UserDetailFragment
 import com.example.dorecomic.fragment.user.UserProfileFragment
-import com.example.dorecomic.minterface.NoneUserClick
+import com.example.dorecomic.fragment.user.UserMenuFragment
 import com.example.dorecomic.model.User
-import com.facebook.AccessToken
-import com.facebook.GraphRequest
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,9 +27,6 @@ class UserFragment : Fragment() {
     private var param2: String? = null
 
     private lateinit var rootView: View
-
-    private var isLogin = false
-
     private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,75 +42,29 @@ class UserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         rootView = inflater.inflate(R.layout.fragment_user, container, false)
-        user = User("Guest","000000")
-        val accessToken = AccessToken.getCurrentAccessToken()
-        isLogin = accessToken != null && !accessToken.isExpired
         initFragment()
         return rootView
     }
 
     private fun initFragment() {
-        val noneUserView = rootView.findViewById<FrameLayout>(R.id.none_user_container)
         val userDetailView = rootView.findViewById<FrameLayout>(R.id.user_detail_container)
         val userProfileView = rootView.findViewById<FrameLayout>(R.id.user_profile_container)
 
-
-        if (!isLogin) {
-            noneUserView.visibility = View.VISIBLE
-            userDetailView.visibility = View.GONE
-            userProfileView.visibility = View.GONE
-
-            val noneUserFragment = NoneUserFragment()
-            childFragmentManager.beginTransaction()
-                .add(R.id.none_user_container, noneUserFragment, null)
-                .commit()
-
-            noneUserFragment.loginClick(object : NoneUserClick {
-                override fun onNoneUserClick(click: Boolean) {
-                    if(click){
-                        startActivityForResult(Intent(activity , LoginActivity::class.java), 999)
-                    }
-                }
-            })
-
-        } else {
-            noneUserView.visibility = View.GONE
-            userProfileView.visibility = View.VISIBLE
-            userDetailView.visibility = View.VISIBLE
+        userProfileView.visibility = View.VISIBLE
+        userDetailView.visibility = View.VISIBLE
 
 
-            val userDetailFragment = UserDetailFragment()
+        val userDetailFragment = UserProfileFragment()
 
-            val bundle = Bundle()
-            bundle.putSerializable("user", user)
-            Log.d("TAG", "initFragment: ${user.name}")
-            userDetailFragment.arguments = bundle
+        childFragmentManager.beginTransaction()
+            .add(R.id.user_detail_container, userDetailFragment, null)
+            .commit()
 
-            childFragmentManager.beginTransaction()
-                .add(R.id.user_detail_container, userDetailFragment, null)
-                .commit()
-
-            val userProfileFragment = UserProfileFragment()
-            childFragmentManager.beginTransaction()
-                .add(R.id.user_profile_container, userProfileFragment, null)
-                .commit()
-        }
+        val userProfileFragment = UserMenuFragment()
+        childFragmentManager.beginTransaction()
+            .add(R.id.user_profile_container, userProfileFragment, null)
+            .commit()
     }
-
-
-
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 999 && resultCode == 1){
-            isLogin = true
-            user = data?.getSerializableExtra("user") as User
-            initFragment()
-        }
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
-
 
     companion object {
         /**

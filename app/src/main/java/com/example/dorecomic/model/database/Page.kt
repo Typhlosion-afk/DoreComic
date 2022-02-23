@@ -1,14 +1,18 @@
-package com.example.dorecomic.model
+package com.example.dorecomic.model.database
 
 import androidx.room.*
 import java.io.Serializable
 
-@Entity(tableName = "page_table",
+@Entity(
+    tableName = "page_table",
     foreignKeys = [
-        ForeignKey(entity = Chapter::class,
+        ForeignKey(
+            entity = Chapter::class,
             parentColumns = ["chapter_path"],
             childColumns = ["chapter_path"],
-            onDelete = ForeignKey.CASCADE)])
+            onDelete = ForeignKey.CASCADE
+        )]
+)
 data class Page(
     @PrimaryKey
     @ColumnInfo(name = "page_path")
@@ -21,5 +25,6 @@ data class Page(
     var num: Int,
 
     @ColumnInfo(name = "page_name")
-    var name: String): Serializable{
+    var name: String
+) : Serializable {
 }

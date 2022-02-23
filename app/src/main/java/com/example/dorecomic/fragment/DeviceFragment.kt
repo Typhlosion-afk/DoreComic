@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dorecomic.R
 import com.example.dorecomic.adapter.ListComicAdapter
 import com.example.dorecomic.model.database.AppDatabase
-import com.example.dorecomic.model.Comic
+import com.example.dorecomic.model.database.Comic
 import java.io.File
 
 // TODO: Rename parameter arguments, choose names that match
@@ -74,7 +74,7 @@ class HomeFragment : Fragment() {
             }
     }
 
-    private fun initAdapter(){
+    private fun initAdapter() {
 //        rootDir = File(rootPath)
 //        val ls : ArrayList<Comic> = ArrayList()
 //        ls.clear()
@@ -88,16 +88,16 @@ class HomeFragment : Fragment() {
 //            .comicDAO()
 //                .addListComic(ls)}
 
-        val ls : ArrayList<Comic> = ArrayList()
+        val ls: ArrayList<Comic> = ArrayList()
         ls.clear()
         context?.let { AppDatabase.getInstance(it).comicDAO().getListComic() }
             ?.let { ls.addAll(it) }
 
-        if(isGridView){
+        if (isGridView) {
             GridLayoutManager(activity, 3, RecyclerView.VERTICAL, false)
                 .apply {
                     recyclerView.layoutManager = this
-            }
+                }
         }
         recyclerView.adapter = context?.let { ListComicAdapter(ls, it) }
     }

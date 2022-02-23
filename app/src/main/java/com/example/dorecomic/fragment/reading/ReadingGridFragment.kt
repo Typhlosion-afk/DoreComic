@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dorecomic.R
 import com.example.dorecomic.adapter.ReadingGridAdapter
-import com.example.dorecomic.model.Page
+import com.example.dorecomic.model.database.Page
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,11 +51,11 @@ class ReadingGridFragment : Fragment() {
         return rootView
     }
 
-    private fun initData(){
+    private fun initData() {
         listPage.addAll(arguments?.getSerializable("list_page") as List<Page>)
     }
 
-    private fun initView(){
+    private fun initView() {
 
         recyclerView = rootView.findViewById(R.id.reading_slide_container)
         GridLayoutManager(activity, 5, RecyclerView.VERTICAL, false)

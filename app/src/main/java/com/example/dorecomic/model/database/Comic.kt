@@ -1,4 +1,4 @@
-package com.example.dorecomic.model
+package com.example.dorecomic.model.database
 
 import androidx.room.*
 import java.io.Serializable
@@ -13,6 +13,7 @@ data class Comic(
     val name: String,
 
     @ColumnInfo(name = "comic_cover")
-    val cover: String) : Serializable{
+    val cover: String
+) : Serializable {
 
 }

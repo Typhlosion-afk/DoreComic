@@ -7,7 +7,8 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 
 class HomePagerAdapter(
     fragmentManager: FragmentManager,
-    private val listFragment: List<Fragment>) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    private val listFragment: List<Fragment>
+) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getCount(): Int {
         return listFragment.size

@@ -12,15 +12,16 @@ import androidx.viewpager.widget.PagerAdapter
 import com.example.dorecomic.R
 import com.example.dorecomic.model.Banner
 
-class BannerPagerAdapter(private val listBanner: List<Banner>): PagerAdapter() {
+class BannerPagerAdapter(private val listBanner: List<Banner>) : PagerAdapter() {
 
     private lateinit var rootView: View
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        rootView = LayoutInflater.from(container.context).inflate(R.layout.banner_item, container, false)
+        rootView =
+            LayoutInflater.from(container.context).inflate(R.layout.banner_item, container, false)
         val img = rootView.findViewById<ImageView>(R.id.item_banner_container)
         img.setImageBitmap(listBanner[position].resBanner)
-        container.addView(rootView,0)
+        container.addView(rootView, 0)
 
         return rootView
     }

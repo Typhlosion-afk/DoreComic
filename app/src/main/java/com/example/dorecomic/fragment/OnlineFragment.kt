@@ -60,8 +60,8 @@ class FavoriteFragment : Fragment() {
             }
     }
 
-    fun initAdapter(){
-        if(isGridView){
+    fun initAdapter() {
+        if (isGridView) {
 
         }
     }

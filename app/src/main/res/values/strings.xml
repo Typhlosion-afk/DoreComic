@@ -10,7 +10,7 @@
     <string name="user_name">User Name</string>
     <string name="id_000000">ID: 000000</string>
     <string name="love">Yêu thích</string>
-    <string name="log_out">Đăng xuất</string>
+    <string name="logout_vie">Đăng xuất</string>
     <string name="history">Lịch sử</string>
     <string name="news">Khám phá</string>
     <!-- Strings related to login -->
@@ -36,8 +36,9 @@
     <string name="file">file</string>
     <string name="facebook_app_id">991958841674048</string>
     <string name="fb_login_protocol_scheme">fb991958841674048</string>
-
-
+    <string name="file_text">Chọn thư mục lưu truyện offline</string>
+    <string name="login_vie">Đăng nhập</string>
+    <string name="feed_back">Phản hồi</string>
 
 
 </resources>

@@ -10,9 +10,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dorecomic.R
-import com.example.dorecomic.model.Page
+import com.example.dorecomic.model.database.Page
 
-class ReadingGridAdapter(var context: Context, var ls: List<Page>):
+class ReadingGridAdapter(var context: Context, var ls: List<Page>) :
     RecyclerView.Adapter<ReadingGridAdapter.GridHolder>() {
 
     private lateinit var rootView: View
@@ -38,9 +38,10 @@ class ReadingGridAdapter(var context: Context, var ls: List<Page>):
         return ls.size
     }
 
-    inner class GridHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class GridHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val pageView: ImageView = itemView.findViewById(R.id.cover_image)
         val txtPage: TextView = itemView.findViewById(R.id.txt_page)
+
         init {
             itemView.setOnClickListener {
 

@@ -1,15 +1,19 @@
-package com.example.dorecomic.model
+package com.example.dorecomic.model.database
 
 import androidx.room.*
 import java.io.Serializable
 
-@Entity(tableName = "chapter_table",
+@Entity(
+    tableName = "chapter_table",
     foreignKeys = [
-        ForeignKey(entity = Comic::class,
+        ForeignKey(
+            entity = Comic::class,
             parentColumns = arrayOf("comic_path"),
             childColumns = arrayOf("comic_path"),
-            onDelete = ForeignKey.CASCADE)])
-class Chapter (
+            onDelete = ForeignKey.CASCADE
+        )]
+)
+class Chapter(
     @PrimaryKey
     @ColumnInfo(name = "chapter_path")
     val path: String,
@@ -18,5 +22,6 @@ class Chapter (
     val comicPath: String,
 
     @ColumnInfo(name = "chapter_name")
-    val name: String): Serializable{
+    val name: String
+) : Serializable {
 }

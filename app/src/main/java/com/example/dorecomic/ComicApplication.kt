@@ -20,11 +20,13 @@ class ComicApplication : Application() {
         activeFacebook()
     }
 
-    private fun createChannelNotification(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            val channel = NotificationChannel(NEW_COMIC_CHANNEL_ID,
+    private fun createChannelNotification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                NEW_COMIC_CHANNEL_ID,
                 "new comic",
-                NotificationManager.IMPORTANCE_DEFAULT)
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
 
             val manager: NotificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -33,7 +35,7 @@ class ComicApplication : Application() {
         }
     }
 
-    private fun activeFacebook(){
+    private fun activeFacebook() {
         FacebookSdk.sdkInitialize(applicationContext);
         AppEventsLogger.activateApp(this);
     }

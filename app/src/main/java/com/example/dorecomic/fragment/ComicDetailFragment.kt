@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dorecomic.R
 import com.example.dorecomic.adapter.ListChapterAdapter
-import com.example.dorecomic.model.Chapter
-import com.example.dorecomic.model.Comic
+import com.example.dorecomic.model.database.Chapter
+import com.example.dorecomic.model.database.Comic
 import com.example.dorecomic.model.database.AppDatabase
 import com.example.dorecomic.model.database.ComicDAO
 import com.example.dorecomic.utilities.COMIC_PATH
@@ -42,7 +42,6 @@ class ComicDetailFragment : Fragment() {
     }
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,19 +55,16 @@ class ComicDetailFragment : Fragment() {
         return rootView
     }
 
-    private fun initData(){
+    private fun initData() {
         dao = AppDatabase.getInstance(rootView.context).comicDAO()
-        val comicPath : String = arguments?.getString(COMIC_PATH) ?: ""
+        val comicPath: String = arguments?.getString(COMIC_PATH) ?: ""
+        Log.d("TAG", "initData: $comicPath")
+
         mComic = dao.getComic(comicPath)
-        Log.d("TAG", "initData: ${mComic.name}")
-
-
         mListChapter.addAll(dao.getListChapterOf(comicPath))
-        Log.d("TAG", "initData: ${mListChapter.size}")
-
     }
 
-    private fun initView(){
+    private fun initView() {
         val coverView = rootView.findViewById<ImageView>(R.id.cover_image_detail)
         val comicName = rootView.findViewById<TextView>(R.id.comic_name_detail)
 

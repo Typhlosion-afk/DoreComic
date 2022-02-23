@@ -1,10 +1,6 @@
 package com.example.dorecomic.model.database
 
 import androidx.room.*
-import com.example.dorecomic.model.Chapter
-import com.example.dorecomic.model.Comic
-import com.example.dorecomic.model.Page
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ComicDAO {
@@ -43,5 +39,17 @@ interface ComicDAO {
 
     @Query("DELETE FROM page_table")
     fun deletePage()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addHis(his: History)
+
+    @Query("SELECT * FROM history_table WHERE page = :pagePath")
+    fun getHisOfPage(pagePath: String): History
+
+    @Query("SELECT * FROM history_table WHERE date = :time")
+    fun getHisAtTime(time: Long): History
+
+    @Query("SELECT * FROM history_table")
+    fun getAllHis(): List<History>
 
 }

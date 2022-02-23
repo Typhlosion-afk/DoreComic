@@ -1,17 +1,18 @@
 package com.example.dorecomic.fragment.reading
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dorecomic.R
 import com.example.dorecomic.adapter.ReadingAdapter
-import com.example.dorecomic.adapter.ReadingGridAdapter
-import com.example.dorecomic.model.Page
+import com.example.dorecomic.model.database.AppDatabase
+import com.example.dorecomic.model.database.History
+import com.example.dorecomic.model.database.Page
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,8 +30,10 @@ class ReadingFragment : Fragment() {
     private var param2: String? = null
 
     private lateinit var rootView: View
+    private lateinit var mLinearLayoutManager: LinearLayoutManager
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var mAdapter: ReadingAdapter
     private var listPage = ArrayList<Page>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,18 +56,31 @@ class ReadingFragment : Fragment() {
         return rootView
     }
 
-    private fun initData(){
+    private fun initData() {
         listPage.addAll(arguments?.getSerializable("list_page") as List<Page>)
     }
 
-    private fun initView(){
+    private fun initView() {
+
         recyclerView = rootView.findViewById(R.id.reading_slide_container)
-        LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             .apply {
                 recyclerView.layoutManager = this
             }
-        recyclerView.adapter = context?.let { ReadingAdapter(it, listPage) }
+        mAdapter = ReadingAdapter(rootView.context, listPage)
+        recyclerView.adapter = mAdapter
+
     }
+
+    override fun onPause() {
+        super.onPause()
+        val scrollPosition = mLinearLayoutManager.findLastVisibleItemPosition()
+        AppDatabase
+            .getInstance(rootView.context)
+            .comicDAO()
+            .addHis(History(0, 1645643279314, listPage[scrollPosition].path))
+    }
+
 
     companion object {
         /**

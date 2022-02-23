@@ -7,17 +7,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target
 import com.example.dorecomic.R
-import com.example.dorecomic.model.Page
-import kotlinx.android.synthetic.main.cardview_file.view.*
+import com.example.dorecomic.model.database.Page
 import kotlinx.android.synthetic.main.cardview_page.view.*
 
-class ReadingAdapter(var context: Context, var ls: List<Page>) : RecyclerView.Adapter<ReadingAdapter.ReadingHolder>() {
+class ReadingAdapter(var context: Context, var ls: List<Page>) :
+    RecyclerView.Adapter<ReadingAdapter.ReadingHolder>() {
 
     private lateinit var rootView: View
+    private var curPos: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReadingHolder {
         rootView = LayoutInflater
@@ -27,12 +25,12 @@ class ReadingAdapter(var context: Context, var ls: List<Page>) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: ReadingHolder, position: Int) {
-            Glide
-                .with(context)
-                .load(ls[position].path)
-                .fitCenter()
-                .placeholder(R.drawable.default_comic)
-                .into(holder.pageView)
+        Glide
+            .with(context)
+            .load(ls[position].path)
+            .fitCenter()
+            .placeholder(R.drawable.default_comic)
+            .into(holder.pageView)
 
     }
 
@@ -40,8 +38,11 @@ class ReadingAdapter(var context: Context, var ls: List<Page>) : RecyclerView.Ad
         return ls.size
     }
 
-    inner class ReadingHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+
+    inner class ReadingHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val pageView: ImageView = itemView.page_comic
 
+
     }
+
 }

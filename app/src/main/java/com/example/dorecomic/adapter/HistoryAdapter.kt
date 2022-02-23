@@ -1,5 +1,6 @@
 package com.example.dorecomic.adapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Context
@@ -14,24 +15,33 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dorecomic.R
 import com.example.dorecomic.activity.ListChapterActivity
-import com.example.dorecomic.model.Comic
+import com.example.dorecomic.model.database.AppDatabase
+import com.example.dorecomic.model.database.Comic
+import com.example.dorecomic.model.database.ComicDAO
+import com.example.dorecomic.model.database.History
+import com.example.dorecomic.utilities.COMIC_PATH
 
-class HistoryAdapter(val context: Context, val listHis: List<Comic>) :
+class HistoryAdapter(val context: Context, private val listHis: ArrayList<History>) :
     RecyclerView.Adapter<HistoryAdapter.HistoryHolder>() {
 
     private lateinit var rootView: View
+    private lateinit var dao: ComicDAO
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryHolder {
-        rootView = LayoutInflater.from(parent.context).inflate(R.layout.cardview_grid_comic, parent, false)
+        rootView =
+            LayoutInflater.from(parent.context).inflate(R.layout.cardview_grid_comic, parent, false)
+        dao = AppDatabase.getInstance(context.applicationContext).comicDAO()
         return HistoryHolder(rootView)
     }
 
     override fun onBindViewHolder(holder: HistoryHolder, position: Int) {
-        holder.comicName.text = listHis[position].name
+        val comic = getComicInHis(position)
+
+        holder.comicName.text = comic.name
 
         Glide
             .with(context)
-            .load(listHis[position].cover)
+            .load(comic.cover)
             .fitCenter()
             .into(holder.comicImg)
     }
@@ -40,20 +50,36 @@ class HistoryAdapter(val context: Context, val listHis: List<Comic>) :
         return listHis.size
     }
 
-    inner class HistoryHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class HistoryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val comicName: TextView = itemView.findViewById(R.id.txt_name_vol_grid)
         val comicImg: ImageView = itemView.findViewById(R.id.cover_image)
+
         init {
-            itemView.setOnClickListener{
+            itemView.setOnClickListener {
                 val intent = Intent(context, ListChapterActivity::class.java).apply {
-                    putExtra("comic", listHis[absoluteAdapterPosition])
+                    putExtra(COMIC_PATH, getComicInHis(absoluteAdapterPosition).path)
                 }
                 val option = ActivityOptions
-                    .makeSceneTransitionAnimation(context as Activity?,
-                        Pair.create(comicImg, "comic_img_trans"),)
+                    .makeSceneTransitionAnimation(
+                        context as Activity?,
+                        Pair.create(comicImg, "comic_img_trans"),
+                    )
                 context.startActivity(intent, option.toBundle())
             }
 
         }
+    }
+
+    private fun getComicInHis(pos: Int): Comic {
+        val page = dao.getPage(listHis[pos].pagePath)
+        val chapter = dao.getChapter(page.chapterPath)
+        return dao.getComic(chapter.comicPath)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateListData(ls: List<History>){
+        listHis.clear()
+        listHis.addAll(ls)
+        notifyDataSetChanged()
     }
 }

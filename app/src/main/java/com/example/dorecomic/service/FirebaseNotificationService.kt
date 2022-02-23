@@ -46,7 +46,7 @@ class FirebaseNotificationService : FirebaseMessagingService() {
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    private fun pushNotification(title: String, mess: String){
+    private fun pushNotification(title: String, mess: String) {
         val intent = Intent(this, LaunchActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
@@ -60,7 +60,7 @@ class FirebaseNotificationService : FirebaseMessagingService() {
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
-        with(NotificationManagerCompat.from(this)){
+        with(NotificationManagerCompat.from(this)) {
             notify(1, builder.build())
         }
     }

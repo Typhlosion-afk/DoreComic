@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dorecomic.R
 import java.io.File
 
-class FileDialogAdapter(val context: Context, var mListFile: ArrayList<File>) : RecyclerView.Adapter<FileDialogAdapter.FileHolder>(){
+class FileDialogAdapter(val context: Context, var mListFile: ArrayList<File>) :
+    RecyclerView.Adapter<FileDialogAdapter.FileHolder>() {
 
     private lateinit var rootView: View
 
@@ -38,9 +39,10 @@ class FileDialogAdapter(val context: Context, var mListFile: ArrayList<File>) : 
     override fun getItemCount(): Int = mListFile.size
 
     @SuppressLint("NotifyDataSetChanged")
-    inner class FileHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class FileHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var txtName: TextView = itemView.findViewById<TextView>(R.id.txt_file_name)
         var checkBox: CheckBox = itemView.findViewById<CheckBox>(R.id.checkbox_file)
+
         init {
             itemView.setOnClickListener {
                 selectedPath = mListFile[absoluteAdapterPosition].absolutePath
@@ -53,7 +55,7 @@ class FileDialogAdapter(val context: Context, var mListFile: ArrayList<File>) : 
     fun getSelectedPath() = selectedPath
 
     @SuppressLint("NotifyDataSetChanged")
-    fun update(newList: ArrayList<File>){
+    fun update(newList: ArrayList<File>) {
         mListFile = newList
         selectedPosition = -1
 
