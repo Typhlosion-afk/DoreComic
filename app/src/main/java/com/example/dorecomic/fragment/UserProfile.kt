@@ -1,4 +1,4 @@
-package com.example.dorecomic.fragment.user
+package com.example.dorecomic.fragment
 
 import android.content.Intent
 import android.graphics.drawable.Drawable

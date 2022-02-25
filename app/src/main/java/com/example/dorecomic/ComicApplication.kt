@@ -9,6 +9,9 @@ import android.os.Build
 import com.example.dorecomic.utilities.NEW_COMIC_CHANNEL_ID
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
+import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 import java.text.Normalizer
 
 class ComicApplication : Application() {
@@ -16,8 +19,17 @@ class ComicApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        firebaseCheckApp()
         createChannelNotification()
         activeFacebook()
+    }
+
+    private fun firebaseCheckApp() {
+        FirebaseApp.initializeApp(/*context=*/this)
+        val firebaseAppCheck = FirebaseAppCheck.getInstance()
+        firebaseAppCheck.installAppCheckProviderFactory(
+            SafetyNetAppCheckProviderFactory.getInstance()
+        )
     }
 
     private fun createChannelNotification() {

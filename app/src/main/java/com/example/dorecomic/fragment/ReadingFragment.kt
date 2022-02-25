@@ -1,14 +1,17 @@
-package com.example.dorecomic.fragment.reading
+package com.example.dorecomic.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dorecomic.R
-import com.example.dorecomic.adapter.ReadingGridAdapter
+import com.example.dorecomic.adapter.ReadingAdapter
+import com.example.dorecomic.model.database.AppDatabase
+import com.example.dorecomic.model.database.History
 import com.example.dorecomic.model.database.Page
 
 // TODO: Rename parameter arguments, choose names that match
@@ -18,17 +21,19 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ReadingFragment.newInstance] factory method to
+ * Use the [ReadingGridFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ReadingGridFragment : Fragment() {
+class ReadingFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
     private lateinit var rootView: View
+    private lateinit var mLinearLayoutManager: LinearLayoutManager
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var mAdapter: ReadingAdapter
     private var listPage = ArrayList<Page>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,12 +63,24 @@ class ReadingGridFragment : Fragment() {
     private fun initView() {
 
         recyclerView = rootView.findViewById(R.id.reading_slide_container)
-        GridLayoutManager(activity, 5, RecyclerView.VERTICAL, false)
+        mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             .apply {
                 recyclerView.layoutManager = this
             }
-        recyclerView.adapter = context?.let { ReadingGridAdapter(it, listPage) }
+        mAdapter = ReadingAdapter(rootView.context, listPage)
+        recyclerView.adapter = mAdapter
+
     }
+
+    override fun onPause() {
+        super.onPause()
+        val scrollPosition = mLinearLayoutManager.findLastVisibleItemPosition()
+        AppDatabase
+            .getInstance(rootView.context)
+            .comicDAO()
+            .addHis(History(0, 1645643279314, listPage[scrollPosition].path))
+    }
+
 
     companion object {
         /**
@@ -72,12 +89,12 @@ class ReadingGridFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment ReadingFragment.
+         * @return A new instance of fragment ReadingGridFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ReadingFragment().apply {
+            ReadingGridFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

@@ -27,8 +27,6 @@ class HomeFragment : Fragment() {
     private var isGridView: Boolean = true
     private lateinit var recyclerView: RecyclerView
     private lateinit var rootView: View
-    private lateinit var rootDir: File
-    private var rootPath: String = "/storage/6431-3633/.comic/"
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null

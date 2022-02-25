@@ -17,6 +17,9 @@ import com.example.dorecomic.model.database.Page
 import com.example.dorecomic.model.database.AppDatabase
 import com.example.dorecomic.utilities.FILE_PERMISSION_CODE
 import com.example.dorecomic.utilities.ROOT_FILE_KEY
+import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 import java.io.File
 
 class LaunchActivity : AppCompatActivity() {
@@ -25,11 +28,20 @@ class LaunchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_launch)
+        firebaseCheckApp()
         checkPermission()
     }
 
     private fun onPermissionGranted() {
         setRootFile()
+    }
+
+    private fun firebaseCheckApp() {
+        FirebaseApp.initializeApp(/*context=*/this)
+        val firebaseAppCheck = FirebaseAppCheck.getInstance()
+        firebaseAppCheck.installAppCheckProviderFactory(
+            SafetyNetAppCheckProviderFactory.getInstance()
+        )
     }
 
     private fun setRootFile() {

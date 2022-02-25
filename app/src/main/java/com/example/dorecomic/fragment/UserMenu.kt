@@ -1,4 +1,4 @@
-package com.example.dorecomic.fragment.user
+package com.example.dorecomic.fragment
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
