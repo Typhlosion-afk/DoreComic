@@ -95,12 +95,14 @@ class OnlReadingFragment : Fragment() {
         Log.d("TEst", "updatePage: ${chapterRef.path}")
         var num = 0;
         chapterRef.listAll().addOnSuccessListener {
-            for(pref in it.prefixes){
+            Log.d("test", "updatePage: ${it.prefixes.size}")
+            for(pref in it.items) {
                 val page = Page(pref.path, chapterRef.path, ++num, pref.name)
                 mAdapter.addNewPage(page)
                 Log.d("TEST", "updatePage: ${page.path}")
             }
         }
+
     }
 
 //    override fun onPause() {
