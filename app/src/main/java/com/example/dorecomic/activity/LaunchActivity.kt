@@ -11,18 +11,25 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.dorecomic.R
 import com.example.dorecomic.fragment.dialog.RootFileChooserFragment
-import com.example.dorecomic.model.database.Chapter
-import com.example.dorecomic.model.database.Comic
-import com.example.dorecomic.model.database.Page
-import com.example.dorecomic.model.database.AppDatabase
+import com.example.dorecomic.model.database.*
 import com.example.dorecomic.utilities.FILE_PERMISSION_CODE
 import com.example.dorecomic.utilities.ROOT_FILE_KEY
 import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
+import kotlinx.coroutines.*
 import java.io.File
 
+@DelicateCoroutinesApi
 class LaunchActivity : AppCompatActivity() {
+
+    private lateinit var dao: ComicDAO
+    private var rootPath: String = ""
+    private lateinit var rootFile: File
+
+    private val lsComic: ArrayList<Comic> = ArrayList()
+    private val lsChapter: ArrayList<Chapter> = ArrayList()
+    private val lsPage: ArrayList<Page> = ArrayList()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +53,7 @@ class LaunchActivity : AppCompatActivity() {
 
     private fun setRootFile() {
         val sharedPrefs: SharedPreferences = getPreferences(MODE_PRIVATE) ?: return
-        val rootPath: String = sharedPrefs.getString(ROOT_FILE_KEY, "").toString()
+        rootPath = sharedPrefs.getString(ROOT_FILE_KEY, "").toString()
         if (rootPath == "") {
             val rootFileChooserFragment = RootFileChooserFragment()
             rootFileChooserFragment.show(supportFragmentManager, null)
@@ -57,7 +64,7 @@ class LaunchActivity : AppCompatActivity() {
                     setRootFile()
                 }
         } else {
-            initDataBase(rootPath)
+            initDataBase()
         }
     }
 
@@ -84,9 +91,10 @@ class LaunchActivity : AppCompatActivity() {
         }
     }
 
-    private fun initDataBase(rootPath: String) {
-        val rootFile = File("$rootPath/.Comic")
-        val comicDAO = AppDatabase.getInstance(this).comicDAO()
+
+    private fun initDataBase() {
+        rootFile = File("$rootPath/.Comic")
+        dao = AppDatabase.getInstance(this).comicDAO()
 
         if (!rootFile.exists()) {
 //            rootFile.mkdirs()
@@ -94,15 +102,34 @@ class LaunchActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
-        val lsComic: ArrayList<Comic> = ArrayList()
-        val lsChapter: ArrayList<Chapter> = ArrayList()
-        val lsPage: ArrayList<Page> = ArrayList()
 
-        comicDAO.deleteComic()
-        comicDAO.deletePage()
-        comicDAO.deleteChapter()
+        Log.d("Check time coroutine", "initDataBase: begin")
+        runBlocking {
+            val readJob = GlobalScope.launch(Dispatchers.IO) {
+                Log.d("Check time coroutine", "initDataBase: read")
+                deleteDataBase()
+                Log.d("Check time coroutine", "initDataBase: read done")
 
-        //add comic data
+            }
+            val deleteJob = GlobalScope.launch(Dispatchers.Default) {
+                Log.d("Check time coroutine", "initDataBase: delete")
+                readFromStorage()
+                Log.d("Check time coroutine", "initDataBase: delete done")
+
+            }
+
+            joinAll(readJob, deleteJob)
+            Log.d("Check time coroutine", "initDataBase: add")
+            insertDataBase()
+            Log.d("Check time coroutine", "initDataBase: add done")
+
+            startActivity(Intent(this@LaunchActivity, MainActivity::class.java))
+            finish()
+        }
+    }
+
+    //read and model data from storage
+    private fun readFromStorage(){
         for (comicFile: File in rootFile.listFiles() ?: return) {
             val coverPath = "${comicFile.absolutePath}/cover/cover.jpg"
             val comic = Comic(comicFile.absolutePath, comicFile.name, coverPath)
@@ -120,14 +147,21 @@ class LaunchActivity : AppCompatActivity() {
                 }
             }
         }
-        comicDAO.addListComic(lsComic)
-        comicDAO.addListChapter(lsChapter)
-        comicDAO.addListPage(lsPage)
-
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
     }
 
+    //delete data in table
+    private fun deleteDataBase(){
+        dao.deleteComic()
+        dao.deleteChapter()
+        dao.deletePage()
+    }
+
+    //insert new data to table
+    private fun insertDataBase(){
+        dao.addListComic(lsComic)
+        dao.addListChapter(lsChapter)
+        dao.addListPage(lsPage)
+    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

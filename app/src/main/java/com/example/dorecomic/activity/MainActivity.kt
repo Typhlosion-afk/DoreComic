@@ -3,6 +3,7 @@ package com.example.dorecomic.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager.widget.ViewPager
@@ -12,6 +13,7 @@ import com.example.dorecomic.adapter.HomePagerAdapter
 import com.example.dorecomic.fragment.FavoriteFragment
 import com.example.dorecomic.fragment.HomeFragment
 import com.example.dorecomic.fragment.UserFragment
+import com.example.dorecomic.fragment.dialog.CloseAppDialogFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.File
 
@@ -48,7 +50,14 @@ class MainActivity : AppCompatActivity() {
                 super.onPageSelected(position)
                 when (position) {
                     0 -> navBottom.menu.findItem(R.id.home).isChecked = true
-                    1 -> navBottom.menu.findItem(R.id.favor).isChecked = true
+                    1 -> {
+                        navBottom.menu.findItem(R.id.favor).isChecked = true
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Bạn đang sử dụng phiên bản Demo\nVui lòng chọn Manga Pokemon để test các tính năng",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                     2 -> navBottom.menu.findItem(R.id.user).isChecked = true
                 }
             }
@@ -63,5 +72,9 @@ class MainActivity : AppCompatActivity() {
             true
         }
         viewPager.offscreenPageLimit = 3
+    }
+
+    override fun onBackPressed() {
+        CloseAppDialogFragment().show(supportFragmentManager, null)
     }
 }

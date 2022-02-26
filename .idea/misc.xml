@@ -20,6 +20,8 @@
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/drawable/bg_gradient.xml" value="0.20277777777777778" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/drawable/bg_gradient_top_name_chap.xml" value="0.1925925925925926" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/drawable/bg_login_btn.xml" value="0.29435897435897435" />
+        <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/drawable/blue_bg.xml" value="0.1765625" />
+        <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/drawable/blue_line_btn_bg.xml" value="0.309375" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/drawable/btn_reading_bg.xml" value="0.1925925925925926" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/drawable/card_profile_bg.xml" value="0.10740740740740741" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/drawable/facebook_btn_layout.xml" value="0.29435897435897435" />
@@ -28,6 +30,7 @@
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/drawable/ic_folder.xml" value="0.225" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/drawable/indicator.xml" value="0.21944444444444444" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/drawable/notification_number_text_bg.xml" value="0.15208333333333332" />
+        <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/drawable/text_blue_bg_20.xml" value="0.309375" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/activity_begin_actvity.xml" value="0.12284701114488349" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/activity_facebook_login.xml" value="0.2807971014492754" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/activity_launch.xml" value="0.14" />
@@ -47,6 +50,7 @@
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/cardview_page.xml" value="0.12588652482269502" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/cardview_vol.xml" value="0.25" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/cardview_vol_grid.xml" value="0.1" />
+        <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/dialog_fragment_close_app.xml" value="0.29322916666666665" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/fragment_chapter_list.xml" value="0.18" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/fragment_comic_detail.xml" value="0.2" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/fragment_detail_chapter.xml" value="0.13697916666666668" />
@@ -62,6 +66,7 @@
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/fragment_reading_grid.xml" value="0.15443840579710144" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/fragment_user.xml" value="0.25" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/fragment_user_detail.xml" value="0.67" />
+        <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/fragment_user_menu.xml" value="0.16041666666666668" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/fragment_user_profile.xml" value="0.32365747460087085" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/layout/item_card_grid_reading.xml" value="0.1344984802431611" />
         <entry key="..\:/Users/HaiDo/Desktop/code/android/DoreComic/app/src/main/res/menu/main_nav_menu.xml" value="0.1734375" />

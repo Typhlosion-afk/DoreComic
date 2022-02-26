@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="top"
-    android:nestedScrollingEnabled="true"
-    tools:context=".fragment.user.UserMenuFragment">
+    android:nestedScrollingEnabled="true">
 
     <LinearLayout
         android:layout_width="match_parent"

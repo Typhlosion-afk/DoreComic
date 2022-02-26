@@ -39,6 +39,9 @@
     <string name="file_text">Chọn thư mục lưu truyện offline</string>
     <string name="login_vie">Đăng nhập</string>
     <string name="feed_back">Phản hồi</string>
+    <string name="close_app_vie">Bạn muốn thoát ứng dụng ?</string>
+    <string name="out_vie">Thoát</string>
+    <string name="cancel_vie">Hủy</string>
 
 
 </resources>
