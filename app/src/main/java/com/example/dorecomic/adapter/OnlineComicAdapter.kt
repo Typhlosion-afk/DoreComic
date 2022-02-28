@@ -16,18 +16,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dorecomic.R
-import com.example.dorecomic.activity.ListChapterActivity
 import com.example.dorecomic.activity.OnlComicDetailActivity
-import com.example.dorecomic.fragment.OnlComicDetailFragment
 import com.example.dorecomic.model.database.Comic
 import com.example.dorecomic.utilities.COMIC_PATH
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class OnlineComicAdapter(var mContext: Context, var mListComic: ArrayList<Comic>) :
     RecyclerView.Adapter<OnlineComicAdapter.OnlineComicHolder>() {

@@ -64,7 +64,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ListChapterActivity"
+            android:name=".activity.ComicDetailActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ReadingActivity"

@@ -14,7 +14,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dorecomic.R
-import com.example.dorecomic.activity.ListChapterActivity
+import com.example.dorecomic.activity.ComicDetailActivity
 import com.example.dorecomic.model.database.AppDatabase
 import com.example.dorecomic.model.database.Comic
 import com.example.dorecomic.model.database.ComicDAO
@@ -56,7 +56,7 @@ class HistoryAdapter(val context: Context, private val listHis: ArrayList<Histor
 
         init {
             itemView.setOnClickListener {
-                val intent = Intent(context, ListChapterActivity::class.java).apply {
+                val intent = Intent(context, ComicDetailActivity::class.java).apply {
                     putExtra(COMIC_PATH, getComicInHis(absoluteAdapterPosition).path)
                 }
                 val option = ActivityOptions

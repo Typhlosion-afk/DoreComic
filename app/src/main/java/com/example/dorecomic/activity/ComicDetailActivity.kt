@@ -7,7 +7,7 @@ import com.example.dorecomic.R
 import com.example.dorecomic.fragment.ComicDetailFragment
 import com.example.dorecomic.utilities.COMIC_PATH
 
-class ListChapterActivity : AppCompatActivity() {
+class ComicDetailActivity : AppCompatActivity() {
 
     private lateinit var mComicPath: String
 

@@ -59,23 +59,23 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/t_ng"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/txt_total_page"
-            tools:ignore="SmallSp" />
-        <TextView
-            android:textSize="12sp"
-            android:layout_marginEnd="10dp"
-            android:id="@+id/txt_total_page"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/trang"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/t_ng"-->
+<!--            android:textSize="12sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/txt_total_page"-->
+<!--            tools:ignore="SmallSp" />-->
+<!--        <TextView-->
+<!--            android:textSize="12sp"-->
+<!--            android:layout_marginEnd="10dp"-->
+<!--            android:id="@+id/txt_total_page"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/trang"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

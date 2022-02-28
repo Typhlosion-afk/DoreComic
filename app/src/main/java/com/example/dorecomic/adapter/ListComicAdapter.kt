@@ -13,7 +13,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dorecomic.R
-import com.example.dorecomic.activity.ListChapterActivity
+import com.example.dorecomic.activity.ComicDetailActivity
 import com.example.dorecomic.model.database.Comic
 import com.example.dorecomic.utilities.COMIC_PATH
 
@@ -44,7 +44,7 @@ class ListComicAdapter(private val list: ArrayList<Comic>, var mContext: Context
 
         init {
             itemView.setOnClickListener {
-                val intent: Intent = Intent(mContext, ListChapterActivity::class.java).apply {
+                val intent: Intent = Intent(mContext, ComicDetailActivity::class.java).apply {
                     putExtra(COMIC_PATH, list[absoluteAdapterPosition].path)
 
                 }
