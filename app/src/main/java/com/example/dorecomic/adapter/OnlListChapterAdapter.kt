@@ -42,6 +42,8 @@ class OnlListChapterAdapter (private val list: ArrayList<Chapter>, val context: 
             itemView.setOnClickListener {
                 val intent = Intent(context, OnlineReadingActivity::class.java)
                 intent.putExtra(CHAPTER_PATH, list[absoluteAdapterPosition].path)
+                intent.putExtra("pos", absoluteAdapterPosition)
+                intent.putExtra("list_chapter", list)
                 context.startActivity(intent)
             }
         }

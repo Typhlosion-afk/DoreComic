@@ -105,7 +105,6 @@ class OnlComicDetailFragment : Fragment() {
                 }
             }
         }
-
     }
 
 

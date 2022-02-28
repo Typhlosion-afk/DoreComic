@@ -56,7 +56,7 @@ class ReadingActivity : AppCompatActivity() {
 
         btnNext = findViewById(R.id.btn_next)
         btnPre = findViewById(R.id.btn_pre)
-        btnShowList = findViewById(R.id.btn_continue)
+//        btnShowList = findViewById(R.id.btn_continue)
 
         readingFragment = ReadingFragment()
         readingGridFragment = ReadingGridFragment()
@@ -73,9 +73,9 @@ class ReadingActivity : AppCompatActivity() {
     }
 
     private fun initAction() {
-        btnShowList.setOnClickListener {
-            replaceFragment()
-        }
+//        btnShowList.setOnClickListener {
+//            replaceFragment()
+//        }
 
     }
 
