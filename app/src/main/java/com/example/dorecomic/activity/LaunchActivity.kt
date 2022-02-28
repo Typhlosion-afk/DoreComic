@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.dorecomic.R
 import com.example.dorecomic.fragment.dialog.RootFileChooserFragment
 import com.example.dorecomic.model.database.*
@@ -16,12 +17,14 @@ import com.example.dorecomic.utilities.FILE_PERMISSION_CODE
 import com.example.dorecomic.utilities.ROOT_FILE_KEY
 import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
 import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 import kotlinx.coroutines.*
 import java.io.File
+import kotlin.coroutines.CoroutineContext
 
 @DelicateCoroutinesApi
-class LaunchActivity : AppCompatActivity() {
+class LaunchActivity : AppCompatActivity(){
 
     private lateinit var dao: ComicDAO
     private var rootPath: String = ""
@@ -33,21 +36,30 @@ class LaunchActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+//        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_launch)
-        firebaseCheckApp()
+//        setContentView(R.layout.activity_launch)
+//        splashScreen.setKeepOnScreenCondition { true }
+
+//        firebaseCheckApp()
         checkPermission()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
     }
 
     private fun onPermissionGranted() {
         setRootFile()
     }
 
-    private fun firebaseCheckApp() {
-        FirebaseApp.initializeApp(/*context=*/this)
-        val firebaseAppCheck = FirebaseAppCheck.getInstance()
+    private fun firebaseCheckApp() = runBlocking{
+        val initializer = async { FirebaseApp.initializeApp(/*context=*/this@LaunchActivity) }
+        initializer.await()
+        val firebaseAppCheck =  FirebaseAppCheck.getInstance()
         firebaseAppCheck.installAppCheckProviderFactory(
-            SafetyNetAppCheckProviderFactory.getInstance()
+            DebugAppCheckProviderFactory.getInstance()
         )
     }
 
@@ -115,21 +127,24 @@ class LaunchActivity : AppCompatActivity() {
                 Log.d("Check time coroutine", "initDataBase: delete")
                 readFromStorage()
                 Log.d("Check time coroutine", "initDataBase: delete done")
+            }
 
+            val checkAppJob = GlobalScope.launch(Dispatchers.Default) {
+                firebaseCheckApp()
             }
 
             joinAll(readJob, deleteJob)
             Log.d("Check time coroutine", "initDataBase: add")
             insertDataBase()
             Log.d("Check time coroutine", "initDataBase: add done")
-
+            checkAppJob.join()
             startActivity(Intent(this@LaunchActivity, MainActivity::class.java))
             finish()
         }
     }
 
     //read and model data from storage
-    private fun readFromStorage(){
+    private fun readFromStorage() {
         for (comicFile: File in rootFile.listFiles() ?: return) {
             val coverPath = "${comicFile.absolutePath}/cover/cover.jpg"
             val comic = Comic(comicFile.absolutePath, comicFile.name, coverPath)
@@ -150,14 +165,14 @@ class LaunchActivity : AppCompatActivity() {
     }
 
     //delete data in table
-    private fun deleteDataBase(){
+    private fun deleteDataBase() {
         dao.deleteComic()
         dao.deleteChapter()
         dao.deletePage()
     }
 
     //insert new data to table
-    private fun insertDataBase(){
+    private fun insertDataBase() {
         dao.addListComic(lsComic)
         dao.addListChapter(lsChapter)
         dao.addListPage(lsPage)
@@ -174,5 +189,9 @@ class LaunchActivity : AppCompatActivity() {
                 onPermissionGranted()
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }
