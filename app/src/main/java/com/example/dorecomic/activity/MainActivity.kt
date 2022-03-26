@@ -52,11 +52,11 @@ class MainActivity : AppCompatActivity() {
                     0 -> navBottom.menu.findItem(R.id.home).isChecked = true
                     1 -> {
                         navBottom.menu.findItem(R.id.favor).isChecked = true
-                        Toast.makeText(
-                            this@MainActivity,
-                            "Bạn đang sử dụng phiên bản Demo\nVui lòng chọn Manga Pokemon để test các tính năng",
-                            Toast.LENGTH_LONG
-                        ).show()
+//                        Toast.makeText(
+//                            this@MainActivity,
+//                            "Bạn đang sử dụng phiên bản Demo\nVui lòng chọn Manga Pokemon để test các tính năng",
+//                            Toast.LENGTH_LONG
+//                        ).show()
                     }
                     2 -> navBottom.menu.findItem(R.id.user).isChecked = true
                 }

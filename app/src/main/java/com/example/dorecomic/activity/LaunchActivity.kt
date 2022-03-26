@@ -40,7 +40,6 @@ class LaunchActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_launch)
 //        splashScreen.setKeepOnScreenCondition { true }
-
 //        firebaseCheckApp()
         checkPermission()
     }
@@ -129,15 +128,15 @@ class LaunchActivity : AppCompatActivity(){
                 Log.d("Check time coroutine", "initDataBase: delete done")
             }
 
-            val checkAppJob = GlobalScope.launch(Dispatchers.Default) {
-                firebaseCheckApp()
-            }
+//            val checkAppJob = GlobalScope.launch(Dispatchers.Default) {
+//                firebaseCheckApp()
+//            }
 
             joinAll(readJob, deleteJob)
             Log.d("Check time coroutine", "initDataBase: add")
             insertDataBase()
             Log.d("Check time coroutine", "initDataBase: add done")
-            checkAppJob.join()
+//            checkAppJob.join()
             startActivity(Intent(this@LaunchActivity, MainActivity::class.java))
             finish()
         }

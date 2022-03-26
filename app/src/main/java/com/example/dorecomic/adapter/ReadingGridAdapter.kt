@@ -30,6 +30,7 @@ class ReadingGridAdapter(var context: Context, var ls: List<Page>) :
             .with(context)
             .load(ls[position].path)
             .fitCenter()
+            .placeholder(R.drawable.default_comic)
             .into(holder.pageView)
         holder.txtPage.text = "${position + 1}"
     }

@@ -64,8 +64,8 @@ class FavoriteFragment : Fragment() {
         rootView = inflater.inflate(R.layout.fragment_online, container, false)
         mListOnlComic = ArrayList()
 
-        initAdapter()
-        initData()
+//        initAdapter()
+//        initData()
         return rootView
     }
 

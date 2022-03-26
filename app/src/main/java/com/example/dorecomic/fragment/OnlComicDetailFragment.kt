@@ -60,9 +60,9 @@ class OnlComicDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_detail_comic, container, false)
 
-        initData()
-        initView()
-        updateListChapter()
+//        initData()
+//        initView()
+//        updateListChapter()
 
         return rootView
     }

@@ -3,6 +3,7 @@ package com.example.dorecomic.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import com.example.dorecomic.R
 import com.example.dorecomic.fragment.ReadingFragment
@@ -22,7 +23,7 @@ class ReadingActivity : AppCompatActivity() {
     private lateinit var txtChapName: TextView
     private lateinit var btnPre: Button
     private lateinit var btnNext: Button
-    private lateinit var btnShowList: Button
+    private lateinit var btnShowList: ImageButton
     private lateinit var readingFragment: ReadingFragment
     private lateinit var readingGridFragment: ReadingGridFragment
 
@@ -56,7 +57,7 @@ class ReadingActivity : AppCompatActivity() {
 
         btnNext = findViewById(R.id.btn_next)
         btnPre = findViewById(R.id.btn_pre)
-//        btnShowList = findViewById(R.id.btn_continue)
+        btnShowList = findViewById(R.id.btn_continue)
 
         readingFragment = ReadingFragment()
         readingGridFragment = ReadingGridFragment()
@@ -73,9 +74,9 @@ class ReadingActivity : AppCompatActivity() {
     }
 
     private fun initAction() {
-//        btnShowList.setOnClickListener {
-//            replaceFragment()
-//        }
+        btnShowList.setOnClickListener {
+            replaceFragment()
+        }
 
     }
 

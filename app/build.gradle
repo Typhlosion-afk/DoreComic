@@ -14,6 +14,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArgument "firebaseAppCheckDebugSecret",
+                System.getenv("APP_CHECK_DEBUG_TOKEN_FROM_CI") ?: ''
+
     }
 
     buildTypes {
@@ -47,6 +50,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.4.1")
     implementation "androidx.core:core-ktx:1.7.0"
     implementation 'androidx.annotation:annotation:1.3.0'
+    implementation 'junit:junit:4.12'
     testImplementation 'junit:junit:'
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -70,8 +74,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'com.google.firebase:firebase-database-ktx'
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
     implementation 'com.google.firebase:firebase-appcheck-debug:16.0.0-beta04'
     implementation 'com.google.firebase:firebase-appcheck-safetynet:16.0.0-beta04'
+    androidTestImplementation 'com.google.firebase:firebase-appcheck-debug-testing:16.0.0-beta04'
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
@@ -79,5 +85,6 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
     implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
+
 
 }

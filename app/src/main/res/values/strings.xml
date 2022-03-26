@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">DoreComic</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -27,7 +27,7 @@
     <string name="todo">TODO</string>
     <string name="pre">Tập trước</string>
     <string name="txt_continue">Đọc tiếp</string>
-    <string name="txt_next">Tập kế tiếp</string>
+    <string name="txt_next">Tập tiếp</string>
     <string name="chap_1">Chap 1</string>
     <string name="back">Back</string>
     <string name="back_vie">Quay lại</string>
@@ -42,6 +42,9 @@
     <string name="close_app_vie">Bạn muốn thoát ứng dụng ?</string>
     <string name="out_vie">Thoát</string>
     <string name="cancel_vie">Hủy</string>
+    <string name="ic_token"
+        tools:ignore="TypographyDashes">E4280CE7-338F-4364-80E7-13C6CB1589D2</string>
+    <string name="continue_vie">Tiếp tục</string>
 
 
 </resources>
