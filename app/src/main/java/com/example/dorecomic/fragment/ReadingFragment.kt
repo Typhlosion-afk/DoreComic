@@ -35,6 +35,7 @@ class ReadingFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var mAdapter: ReadingAdapter
     private var listPage = ArrayList<Page>()
+//    private var readingPage = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +59,7 @@ class ReadingFragment : Fragment() {
 
     private fun initData() {
         listPage.addAll(arguments?.getSerializable("list_page") as List<Page>)
+//        readingPage = arguments?.getInt("page") ?: 0
     }
 
     private fun initView() {
@@ -69,16 +71,17 @@ class ReadingFragment : Fragment() {
             }
         mAdapter = ReadingAdapter(rootView.context, listPage)
         recyclerView.adapter = mAdapter
+//        recyclerView.scrollToPosition(readingPage)
 
     }
 
     override fun onPause() {
         super.onPause()
-        val scrollPosition = mLinearLayoutManager.findLastVisibleItemPosition()
-        AppDatabase
-            .getInstance(rootView.context)
-            .comicDAO()
-            .addHis(History(0, 1645643279314, listPage[scrollPosition].path))
+//        val scrollPosition = mLinearLayoutManager.findLastVisibleItemPosition()
+//        AppDatabase
+//            .getInstance(rootView.context)
+//            .comicDAO()
+//            .addHis(History(0, 1645643279314, listPage[scrollPosition].path))
     }
 
 

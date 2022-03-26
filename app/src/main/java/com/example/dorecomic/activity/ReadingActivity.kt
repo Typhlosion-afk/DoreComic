@@ -2,9 +2,9 @@ package com.example.dorecomic.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
+import android.util.Log
+import android.view.View
+import android.widget.*
 import com.example.dorecomic.R
 import com.example.dorecomic.fragment.ReadingFragment
 import com.example.dorecomic.fragment.ReadingGridFragment
@@ -26,6 +26,14 @@ class ReadingActivity : AppCompatActivity() {
     private lateinit var btnShowList: ImageButton
     private lateinit var readingFragment: ReadingFragment
     private lateinit var readingGridFragment: ReadingGridFragment
+
+    private lateinit var viewContainer: FrameLayout
+
+    private lateinit var viewButton: LinearLayout
+
+    private lateinit var viewText: LinearLayout
+
+    private var isHiding: Boolean = false
 
     private var readingPage = 0;
 
@@ -58,7 +66,9 @@ class ReadingActivity : AppCompatActivity() {
         btnNext = findViewById(R.id.btn_next)
         btnPre = findViewById(R.id.btn_pre)
         btnShowList = findViewById(R.id.btn_continue)
-
+        viewContainer = findViewById(R.id.container)
+        viewButton = findViewById(R.id.container_btn)
+        viewText = findViewById(R.id.container_text)
         readingFragment = ReadingFragment()
         readingGridFragment = ReadingGridFragment()
 
@@ -76,6 +86,20 @@ class ReadingActivity : AppCompatActivity() {
     private fun initAction() {
         btnShowList.setOnClickListener {
             replaceFragment()
+        }
+
+        viewContainer.setOnClickListener {
+            Log.d("TAG", "initAction: click")
+            if(isHiding){
+                viewButton.visibility = View.VISIBLE
+                viewText.visibility = View.VISIBLE
+            }else{
+                viewButton.visibility = View.GONE
+                viewText.visibility = View.GONE
+
+            }
+            isHiding = !isHiding
+
         }
 
     }

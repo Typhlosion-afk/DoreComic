@@ -38,30 +38,30 @@ class FirebaseNotificationService : FirebaseMessagingService() {
         val strTitle: String = notification.title ?: "Thông báo"
         val strMess: String = notification.body ?: "<Trống>"
 
-        pushNotification(strTitle, strMess)
+//        pushNotification(strTitle, strMess)
     }
 
     override fun onNewToken(p0: String) {
         super.onNewToken(p0)
     }
-
-    @SuppressLint("UnspecifiedImmutableFlag")
-    private fun pushNotification(title: String, mess: String) {
-        val intent = Intent(this, LaunchActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-
-        val builder = NotificationCompat.Builder(this, NEW_COMIC_CHANNEL_ID)
-            .setSmallIcon(R.drawable.default_comic)
-            .setContentTitle(title)
-            .setContentText(mess)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-
-        with(NotificationManagerCompat.from(this)) {
-            notify(1, builder.build())
-        }
-    }
+//
+//    @SuppressLint("UnspecifiedImmutableFlag")
+//    private fun pushNotification(title: String, mess: String) {
+//        val intent = Intent(this, LaunchActivity::class.java).apply {
+//            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//        }
+//        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+//
+//        val builder = NotificationCompat.Builder(this, NEW_COMIC_CHANNEL_ID)
+//            .setSmallIcon(R.drawable.default_comic)
+//            .setContentTitle(title)
+//            .setContentText(mess)
+//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//            .setContentIntent(pendingIntent)
+//            .setAutoCancel(true)
+//
+//        with(NotificationManagerCompat.from(this)) {
+//            notify(1, builder.build())
+//        }
+//    }
 }

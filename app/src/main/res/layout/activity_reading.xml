@@ -13,6 +13,7 @@
         android:layout_height="match_parent" />
 
     <LinearLayout
+        android:id="@+id/container_text"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@drawable/bg_gradient_top_name_chap"
@@ -45,6 +46,7 @@
 
 
     <LinearLayout
+        android:id="@+id/container_btn"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginBottom="20dp"

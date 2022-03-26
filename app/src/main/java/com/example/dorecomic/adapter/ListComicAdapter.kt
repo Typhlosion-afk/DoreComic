@@ -33,6 +33,7 @@ class ListComicAdapter(private val list: ArrayList<Comic>, var mContext: Context
             .with(mContext)
             .load(list[position].cover)
             .fitCenter()
+            .placeholder(R.drawable.default_comic )
             .into(holder.comicImg)
     }
 
